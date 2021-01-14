@@ -25,15 +25,10 @@ export class Router {
     })
   }
 
-  add(routesPath, callback, exact = false) {
-    let routes = [routesPath]
-    if (typeof routesPath === 'object') {
-      routes = this._mapRoutesToAdd(routesPath)
-    } else {
-      routes = this._mapRoutesToAdd(routes)
-    }
+  add(routesPath, callback) {
+    let newRoute = this._mapRoutesToAdd(typeof routesPath === 'object' ? routesPath : [routesPath])
     this.routes.push({
-      uris: routes,
+      uris: newRoute,
       callback,
     })
   }
