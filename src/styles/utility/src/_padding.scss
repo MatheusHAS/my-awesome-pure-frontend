@@ -1,0 +1,15 @@
+$PADDING_SIZES: 0 4 8 12 16 24 32 40 48 56 64;
+$PROPERTYS: default top left right bottom;
+$SUFIXES: "" sm md;
+
+@each $prop in $PROPERTYS {
+  @each $sufix in $SUFIXES {
+    @if $sufix != "" {
+      @include mediaquery($sufix) {
+        @include padding($prop, $PADDING_SIZES, $sufix);
+      }
+    } @else {
+      @include padding($prop, $PADDING_SIZES);
+    }
+  }
+}

@@ -1,0 +1,23 @@
+$MARGIN_SIZES: 0 4 8 12 16 24 32 40 48 56 64;
+$PROPERTYS: top left right bottom;
+$SUFIXES: "" sm md;
+
+.u-m-0 {
+  margin: 0;
+}
+
+.u-m-auto {
+  margin: auto;
+}
+
+@each $prop in $PROPERTYS {
+  @each $sufix in $SUFIXES {
+    @if $sufix != "" {
+      @include mediaquery($sufix) {
+        @include margin($prop, $MARGIN_SIZES, $sufix);
+      }
+    } @else {
+      @include margin($prop, $MARGIN_SIZES);
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@import "./src/mixins";
+@import "./src/variables";
+
+.#{$component} {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    background: $list-background-header;
+    padding: $list-padding-double $list-padding-double;
+    border-top-left-radius: $list-radius;
+    border-top-right-radius: $list-radius;
+  }
+
+  &__item {
+    padding: $list-padding $list-padding-double;
+    width: 100%;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-gray;
+    }
+    &:last-child {
+      border-bottom-left-radius: $list-radius;
+      border-bottom-right-radius: $list-radius;
+    }
+
+    &:first-child {
+      border-top-left-radius: $list-radius;
+      border-top-right-radius: $list-radius;
+    }
+  }
+
+  &__actions {
+    a {
+      color: $color-text;
+      span {
+        color: $color-blue-dark;
+        border-radius: $list-action-radius;
+        border: 1px solid $list-action-bg;
+        padding: $list-action-padding;
+      }
+      &:hover {
+        span {
+          color: $color-blue-light;
+          background: $list-action-bg;
+        }
+        &.js-list-remove {
+          span {
+            color: $color-red;
+          }
+        }
+      }
+    }
+  }
+}

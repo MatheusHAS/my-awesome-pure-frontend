@@ -1,0 +1,10 @@
+.o-list {
+  list-style: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 0;
+
+  &__header {
+    padding: 9px 15px;
+  }
+}

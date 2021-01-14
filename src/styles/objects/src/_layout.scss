@@ -1,0 +1,46 @@
+$gridlist-prefix-sizes: xs sm md lg;
+
+.o-container {
+  margin: 0 auto;
+  max-width: $grid-width;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+  width: 100%;
+}
+
+.o-row {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+}
+
+.o-column {
+  flex: 0 0 auto;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  max-width: 100%;
+  width: 100%;
+}
+
+@each $current in $gridlist-prefix-sizes {
+  @include mediaquery($current) {
+    @include column($current, 12);
+  }
+}
+
+.o-backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  height: 100vh;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.2s ease;
+  visibility: hidden;
+  width: 100vw;
+  will-change: opacity;
+  z-index: 10;
+}

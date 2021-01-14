@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@import 'resets.scss';
+@import 'variables.scss';
+
+@import 'components/components.scss';
+
+@import 'mixins/mixins.scss';
+@import 'objects/objects.scss';
+@import 'utility/utility.scss';
+
+@import 'pages/pages.scss';
+
+body {
+  background-color: $color-bg-gray;
+}
+
+span,
+section,
+div,
+footer,
+header,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
+  color: $color-text;
+}
