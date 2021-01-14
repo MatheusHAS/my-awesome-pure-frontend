@@ -1,13 +1,13 @@
-@mixin fontsize($sizes, $sufix: "") {
+@mixin fontsize($sizes, $sufix: '') {
   @each $size in $sizes {
-    $size: #{($size/16)}rem;
-    @if $sufix != "" {
+    $fontSize: #{($size/16)}rem;
+    @if $sufix != '' {
       .u-fs-#{$size}\@#{$sufix} {
-        font-size: $size;
+        font-size: $fontSize;
       }
     } @else {
       .u-fs-#{$size} {
-        font-size: $size;
+        font-size: $fontSize;
       }
     }
   }
