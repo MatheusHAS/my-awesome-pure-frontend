@@ -1,0 +1,26 @@
+@import './src/mixins';
+@import './src/variables';
+
+.#{$component} {
+  display: flex;
+  background: #ccc;
+  height: 64px;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__list {
+    display: flex;
+    li {
+      list-style-type: none;
+      a {
+        padding: 20px 8px;
+        text-decoration: none;
+      }
+    }
+  }
+}

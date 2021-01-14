@@ -1,27 +1,27 @@
-const path = require('path')
+const { join, resolve } = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: ['./src/styles/main.scss', './src/javascript/main.js'],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: join(__dirname, 'dist'),
     filename: '[name]-bundle-[hash].js',
     publicPath: '/',
   },
   resolve: {
     extensions: ['.js', 'scss'],
     alias: {
-      '@': path.join(__dirname, 'src'),
+      '@': join(__dirname, 'src'),
     },
   },
   module: {
     rules: [
       {
         test: /\.html$/,
-        include: path.resolve(__dirname, 'src/views'),
+        include: resolve(__dirname, 'src', 'views'),
         loader: 'html-loader',
-        exclude: /node_modules|layout|includes/,
+        exclude: /node_modules/,
         options: {
           minimize: false,
         },
@@ -45,7 +45,6 @@ module.exports = {
       },
     ],
   },
-
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({

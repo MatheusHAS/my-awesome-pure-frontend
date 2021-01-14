@@ -1,16 +1,16 @@
 const { DefinePlugin } = require('webpack')
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const templates = require('./webpack.template')
 
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './public',
+    contentBase: './src',
     writeToDisk: true,
-    historyApiFallback: true,
+    historyApiFallback: false,
+    watchContentBase: true,
     port: 8080,
   },
   plugins: [
