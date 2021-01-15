@@ -1,13 +1,18 @@
+/**
+ * Add a debounce time to dispatch function
+ * @param {function} fn [custom function to dispath]
+ * @param {number} wait [time to wait on debounce]
+ */
 const debounce = (fn, wait) => {
-  let timeout;
+  let timeout
 
   return () => {
-    const run = () => fn.apply(this, arguments);
+    const run = () => fn.apply(this, arguments)
 
-    clearTimeout(timeout);
-    timeout = setTimeout(run, wait);
-  };
-};
+    clearTimeout(timeout)
+    timeout = setTimeout(run, wait)
+  }
+}
 
-export default debounce;
-export { debounce };
+export default debounce
+export { debounce }
