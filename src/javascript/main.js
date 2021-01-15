@@ -4,7 +4,7 @@ import { Router } from '@/javascript/modules/router'
 ready(() => {
   console.log('--- PAGE READY ---')
   const router = new Router()
-  router.add(['/'], () => {
+  router.add(['/', '/index.html'], () => {
     import(/* webpackChunkName: "homepage" */ './pages/homepage').then((module) => {
       const fn = module.default
       fn()

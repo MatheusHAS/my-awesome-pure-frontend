@@ -16,10 +16,8 @@
   &__list {
     display: flex;
     li {
-      list-style-type: none;
       a {
-        padding: 20px 8px;
-        text-decoration: none;
+        padding: 8px;
       }
     }
   }
