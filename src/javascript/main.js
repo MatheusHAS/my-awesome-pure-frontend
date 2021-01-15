@@ -10,5 +10,11 @@ ready(() => {
       fn()
     })
   })
+  router.add(['/create.html', '/create'], () => {
+    import(/* webpackChunkName: "create" */ './pages/create').then((module) => {
+      const fn = module.default
+      fn()
+    })
+  })
   router.execute()
 })

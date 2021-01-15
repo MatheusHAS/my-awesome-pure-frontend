@@ -21,7 +21,7 @@ export class Router {
           newRoute = newRoute.replace(new RegExp(param, 'g'), '([^/]+)')
         }
       }
-      return newRoute
+      return newRoute === '/' ? '^/$' : newRoute
     })
   }
 
@@ -34,7 +34,17 @@ export class Router {
   }
 
   matchRoutes() {
-    return this.routes.filter((route) => route.uris.filter((uri) => this.currentPath.match(new RegExp(uri))).length > 0)
+    return this.routes.filter(
+      (route) =>
+        route.uris.filter((uri) => {
+          console.log('-----')
+          console.log(this.currentPath)
+          console.log(uri)
+          console.log(new RegExp(uri))
+          console.log('-----')
+          return this.currentPath.match(new RegExp(uri))
+        }).length > 0
+    )
   }
 
   execute() {
