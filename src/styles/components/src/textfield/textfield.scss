@@ -1,5 +1,5 @@
-@import "./src/mixins";
-@import "./src/variables";
+@import './src/mixins';
+@import './src/variables';
 
 .#{$component} {
   position: relative;
@@ -8,7 +8,7 @@
     font-family: inherit;
     width: 100%;
     border: 0;
-    border-bottom: 1px solid #d2d2d2;
+    border-bottom: 1px solid $color-input-without-focus;
     outline: 0;
     font-size: 16px;
     color: $color-text;
@@ -28,15 +28,14 @@
     }
 
     &:focus {
-      // color: transparent;
       border: none;
       text-shadow: 0 0 0 gray;
 
       outline: none;
-      border-bottom: 2px solid $color-blue-light;
+      border-bottom: 2px solid $color-input-focus;
 
       ~ .#{$component}__label {
-        color: $color-blue-light;
+        color: $color-input-focus;
         position: absolute;
         top: 4px;
         display: block;
@@ -55,9 +54,9 @@
     .#{$component}__input {
       border-bottom: 2px solid $color-error;
 
-      & ~ .#{$component}__label {
-        color: $color-error;
-      }
+      // & ~ .#{$component}__label {
+      //   color: $color-error;
+      // }
     }
   }
 
@@ -67,7 +66,8 @@
     display: block;
     transition: 0.2s;
     font-size: 12px;
-    color: #9b9b9b;
+    z-index: -1;
+    color: $color-input-without-focus;
   }
 
   &__helper {

@@ -1,56 +1,42 @@
-@import "./src/mixins";
-@import "./src/variables";
+@import './src/mixins';
+@import './src/variables';
 
 .#{$component} {
   position: relative;
   box-sizing: border-box;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px;
   vertical-align: middle;
   text-decoration: none;
   text-align: center;
   text-overflow: ellipsis;
-  text-transform: uppercase;
-  color: $color-blue-light;
   font-size: 12px;
   font-weight: 600;
   padding: 8px 14px;
   line-height: 2.5;
+  min-width: 150px;
   transition: background-color 0.3s ease;
   overflow: hidden;
   outline: none;
   cursor: pointer;
 
-  &--disabled {
-    color: $color-gray;
-    background-color: $color-disabled;
-    cursor: not-allowed;
-  }
-
-  &--secondary {
-    @include button-bordered($color-white, $color-white, $color-blue-light);
-  }
-
-  &--secondary-gray {
-    @include button(#292831, #efeef4);
-  }
-
-  &--secondary-white {
-    @include button-bordered($color-white, $color-white, $color-blue-light);
-  }
-
-  &--secondary-red {
-    @include button-bordered($color-white, $color-white, $color-red);
-  }
-
   &--primary {
-    @include button($color-white, $color-blue-light);
+    @include button-opacity($color-white, $color-blue-esmerald);
+  }
+
+  &--disabled {
+    color: $color-disabled-font;
+    background-color: $color-disabled-bg;
+    cursor: not-allowed;
+
+    &:hover {
+      opacity: 100%;
+    }
   }
 
   &[disabled],
   &.is-disabled {
     cursor: not-allowed;
-    opacity: 0.65;
   }
 
   &:hover::before {

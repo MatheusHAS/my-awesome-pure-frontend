@@ -10,6 +10,18 @@
   }
 }
 
+@mixin button-opacity($text-color, $background-color, $opacity: 70%) {
+  color: $text-color;
+  background-color: $background-color;
+  span {
+    color: $text-color;
+  }
+
+  &:hover {
+    opacity: $opacity;
+  }
+}
+
 @mixin button-bordered($text-color, $text-color-hover, $background-color) {
   background-color: transparent;
   color: $background-color;
