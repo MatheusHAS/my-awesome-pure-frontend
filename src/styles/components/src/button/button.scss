@@ -3,12 +3,14 @@
 
 .#{$component} {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   border: none;
   border-radius: 50px;
   vertical-align: middle;
   text-decoration: none;
-  text-align: center;
   text-overflow: ellipsis;
   font-size: 12px;
   font-weight: 600;
@@ -19,6 +21,10 @@
   overflow: hidden;
   outline: none;
   cursor: pointer;
+
+  &__text {
+    color: $color-white;
+  }
 
   &--primary {
     @include button-opacity($color-white, $color-blue-esmerald);
