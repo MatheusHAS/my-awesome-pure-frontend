@@ -8,7 +8,7 @@
     font-family: inherit;
     width: 100%;
     border: 0;
-    border-bottom: 1px solid $color-input-without-focus;
+    border-bottom: 1px solid $color-input-focus;
     outline: 0;
     font-size: 16px;
     color: $color-text;
@@ -85,6 +85,7 @@
 .is-dirty {
   .#{$component}__label {
     position: absolute;
+    color: $color-input-focus;
     top: 4px;
     display: block;
     transition: 0.2s;
