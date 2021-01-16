@@ -44,7 +44,7 @@ ready(() => {
     })
   })
   router.add(['/create.html', '/create'], () => {
-    import(/* webpackChunkName: "create" */ './pages/create').then((module) => {
+    import(/* webpackChunkName: "member" */ './pages/member').then((module) => {
       const fn = module.default
       fn()
     })

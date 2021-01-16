@@ -9,7 +9,6 @@ export class Form {
   isLoading = false
 
   constructor({ callback, formSelector = '[data-form]', options = {} } = {}) {
-    console.log(formSelector)
     this.validator = new Validator(formSelector, options)
     if (callback) {
       this.addSubmitEvent(callback)

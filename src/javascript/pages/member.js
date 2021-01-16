@@ -1,4 +1,5 @@
 import { Form } from '@/javascript/modules'
+import { createMember } from '@/javascript/modules/memberCrud'
 import Textfield from '@/styles/components/src/textfield/textfield'
 
 const formInstance = new Form()
@@ -10,8 +11,9 @@ const actions = {
     const arrayFields = [name, email, cpf, phone]
     formInstance.disableFields(true, arrayFields)
     const formData = formInstance.getFormDataByElements(arrayFields)
-    console.log(formData)
     setTimeout(() => {
+      createMember(formData)
+      formInstance.validator.form.reset()
       formInstance.disableFields(false, arrayFields)
       formInstance.setLoading(false)
     }, 2000)
