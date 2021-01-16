@@ -6,6 +6,8 @@ const ValidationMessageSufix = '-message'
 
 export class Validator {
   form = null
+  submitButton = null
+  isValid = false
   errorMessageSelector = '[data-error-message]'
   rowSelector = '[data-field-row]'
   inputSelector = '[data-field-input]'
@@ -15,9 +17,14 @@ export class Validator {
   clearOnEmpty = true
   inputs = []
 
-  constructor(formSelector = '[data-form]', options = {}) {
-    this.form = document.querySelector(formSelector)
+  constructor(formSelector, callback, options = {}) {
+    this.form = document.querySelector(formSelector || '[data-form]')
     this.form?.setAttribute('novalidate', 'true')
+    if (!this.form) {
+      console.warn('Check if form exists or remove the validation dependecy.')
+      return
+    }
+    this.submitButton = this.form.querySelector('[type="submit"]')
     const { errorMessageSelector, rowSelector, errorClass, successClass, clearOnEmpty, validateEvent } = options
     if (errorMessageSelector) {
       this.errorMessageSelector = errorMessageSelector
@@ -78,7 +85,7 @@ export class Validator {
   validateField(inputRow) {
     const { value, name } = inputRow.input
     const { rules } = inputRow
-    rules.every((rule) => {
+    return rules.every((rule) => {
       const { validateFunction, parameter, errorMessage } = rule
       const isValid = parameter ? validateFunction(value, parameter) : validateFunction(value)
       if (inputRow.row.classList.contains(this.errorClass)) {
@@ -90,6 +97,30 @@ export class Validator {
       return isValid
     })
   }
+
+  validate() {
+    const validations = this.inputs.map((inputRow) => this.validateField(inputRow))
+    const isValid = validations.filter((isValid) => isValid == false)
+    return isValid.length === 0
+  }
+
+  // _makeRequest() {
+  //   const { action, method } = this.form
+  //   if (['get', 'post'].indexOf(method) <= 0) {
+  //     console.error('invalid form method')
+  //     return
+  //   }
+  //   if (method === 'get') {
+  //     Request.get(action).then((result) => {
+  //     }).catch((error) => {
+  //       console.log('error', error)
+  //     })
+  //   } else {
+  //   }
+  //   console.log(this.form)
+  //   console.log(action)
+  //   console.log(method)
+  // }
 
   _mapInputs() {
     if (!this.form) {
