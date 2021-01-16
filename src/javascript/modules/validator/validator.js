@@ -7,13 +7,14 @@ const ValidationMessageSufix = '-message'
 export class Validator {
   form = null
   submitButton = null
-  isValid = false
+  formIsValid = false
   errorMessageSelector = '[data-error-message]'
   rowSelector = '[data-field-row]'
   inputSelector = '[data-field-input]'
   errorClass = 'has-error'
   successClass = 'has-success'
   validateEvent = 'keyup'
+  disabledClass = 'c-button--disabled'
   clearOnEmpty = true
   inputs = []
 
@@ -25,7 +26,15 @@ export class Validator {
       return
     }
     this.submitButton = this.form.querySelector('[type="submit"]')
-    const { errorMessageSelector, rowSelector, errorClass, successClass, clearOnEmpty, validateEvent } = options
+    const {
+      errorMessageSelector,
+      disabledClass,
+      rowSelector,
+      errorClass,
+      successClass,
+      clearOnEmpty,
+      validateEvent,
+    } = options
     if (errorMessageSelector) {
       this.errorMessageSelector = errorMessageSelector
     }
@@ -44,8 +53,12 @@ export class Validator {
     if (validateEvent) {
       this.validateEvent = validateEvent
     }
+    if (disabledClass) {
+      this.disabledClass = disabledClass
+    }
     this._mapInputs()
     this._addValidationEvents()
+    this.submitButton.classList.toggle(this.disabledClass, !this.formIsValid)
   }
 
   _addValidateEventOnInput(inputField, event) {
@@ -74,6 +87,8 @@ export class Validator {
               } else {
                 this.validateField(inputRow)
               }
+              this.formIsValid = this.validate(true)
+              this.submitButton.classList.toggle(this.disabledClass, !this.formIsValid)
             })
             alreadAddedEvent = true
           }
@@ -82,45 +97,28 @@ export class Validator {
     })
   }
 
-  validateField(inputRow) {
+  validateField(inputRow, silent = false) {
     const { value, name } = inputRow.input
     const { rules } = inputRow
     return rules.every((rule) => {
       const { validateFunction, parameter, errorMessage } = rule
       const isValid = parameter ? validateFunction(value, parameter) : validateFunction(value)
-      if (inputRow.row.classList.contains(this.errorClass)) {
+      if (!silent && inputRow.row.classList.contains(this.errorClass)) {
         this._clearMessageError(name)
       }
-      if (!isValid) {
+      if (!silent && !isValid) {
         this._setErrorMessage(name, errorMessage)
       }
       return isValid
     })
   }
 
-  validate() {
-    const validations = this.inputs.map((inputRow) => this.validateField(inputRow))
+  validate(silent = false) {
+    const validations = this.inputs.map((inputRow) => this.validateField(inputRow, silent))
     const isValid = validations.filter((isValid) => isValid == false)
-    return isValid.length === 0
+    this.formIsValid = isValid.length === 0
+    return this.formIsValid
   }
-
-  // _makeRequest() {
-  //   const { action, method } = this.form
-  //   if (['get', 'post'].indexOf(method) <= 0) {
-  //     console.error('invalid form method')
-  //     return
-  //   }
-  //   if (method === 'get') {
-  //     Request.get(action).then((result) => {
-  //     }).catch((error) => {
-  //       console.log('error', error)
-  //     })
-  //   } else {
-  //   }
-  //   console.log(this.form)
-  //   console.log(action)
-  //   console.log(method)
-  // }
 
   _mapInputs() {
     if (!this.form) {
