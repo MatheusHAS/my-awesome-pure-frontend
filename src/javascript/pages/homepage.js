@@ -21,7 +21,6 @@ const options = {
 
 const loadMembersList = () => {
   const memberList = LocalStorage.getItem(stateKeyName)
-  console.log(memberList)
   if (elements.list) {
     elements.list.innerHTML = ''
     const contentFragment = document.createDocumentFragment()

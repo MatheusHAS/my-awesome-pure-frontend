@@ -1,8 +1,9 @@
-import { Form } from '@/javascript/modules'
+import { Form, Masker } from '@/javascript/modules'
 import { createMember } from '@/javascript/modules/memberCrud'
 import Textfield from '@/styles/components/src/textfield/textfield'
 
 const formInstance = new Form()
+const maker = new Masker()
 
 const actions = {
   create: (event, form) => {

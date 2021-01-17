@@ -7,7 +7,6 @@ const Typings = ['tel', 'numeric']
 
 const mount = () => {
   const inputs = document.querySelectorAll(ClassMap.input)
-  console.log(inputs)
 
   if (inputs.length > 0) {
     inputs.forEach((input) => upgrade(input))
