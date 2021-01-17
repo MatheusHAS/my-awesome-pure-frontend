@@ -21,12 +21,6 @@ describe('Testing [memberCrud] module', () => {
     expect(spyOnCreate).toBeCalledTimes(2)
   })
   test('Should updateMemberByEmail', () => {
-    // memberCrud.createMember({
-    //   name: 'Matheus',
-    //   email: 'matheus@matheus.com',
-    //   cpf: '12345678910',
-    //   phone: '18912345678',
-    // })
     const spyOnUpdate = jest.spyOn(memberCrud, 'updateMemberByEmail')
     memberCrud.updateMemberByEmail('matheus@matheus.com', {
       name: 'Matheus Update',
