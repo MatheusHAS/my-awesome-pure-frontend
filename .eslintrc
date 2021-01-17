@@ -1,10 +1,5 @@
 {
-  "extends": ["standard-with-typescript", "plugin:prettier/recommended", "plugin:react/recommended"],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
+  "extends": ["standard-with-typescript", "plugin:prettier/recommended"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -20,9 +15,13 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/default-param-last": "off",
     "@typescript-eslint/no-invalid-void-type": "off",
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-implied-eval": "off",
+    "@typescript-eslint/no-extraneous-class": "off",
+    "no-prototype-builtins": "off",
+    "no-useless-return": "off",
     "prettier/prettier": "error"
   },
-  "plugins": ["react", "prettier"]
+  "plugins": ["prettier"]
 }

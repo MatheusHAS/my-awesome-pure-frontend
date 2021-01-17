@@ -12,13 +12,13 @@ const getMemberEmailFromParam = () => {
   return memberEmail
 }
 
-const actions = {
-  create: (event, form) => {
+const actions: any = {
+  create: (event: VoidFunction, form: HTMLFormElement) => {
     const { elements } = form
-    const { name, email, cpf, phone } = elements
-    const arrayFields = [name, email, cpf, phone]
+    const { name, email, cpf, phone }: any = elements
+    const arrayFields: any[] = [name, email, cpf, phone]
     formInstance.disableFields(true, arrayFields)
-    const formData = formInstance.getFormDataByElements(arrayFields)
+    const formData: any = formInstance.getFormDataByElements(arrayFields)
     setTimeout(() => {
       formData.cpf = formData.cpf.replace(/[^\d]+/g, '')
       formData.phone = formData.phone.replace(/[^\d]+/g, '')
@@ -28,12 +28,12 @@ const actions = {
       formInstance.setLoading(false)
     }, 2000)
   },
-  update: (event, form) => {
+  update: (event: VoidFunction, form: HTMLFormElement) => {
     const { elements } = form
-    const { name, cpf, phone } = elements
+    const { name, cpf, phone }: any = elements
     const arrayFields = [name, cpf, phone]
     formInstance.disableFields(true, arrayFields)
-    const formData = formInstance.getFormDataByElements(arrayFields)
+    const formData: any = formInstance.getFormDataByElements(arrayFields)
     setTimeout(() => {
       formData.cpf = formData.cpf.replace(/[^\d]+/g, '')
       formData.phone = formData.phone.replace(/[^\d]+/g, '')

@@ -7,11 +7,17 @@ const ClassMap = {
   dirty: 'is-dirty',
 }
 
+interface IForm {
+  callback?: () => VoidFunction
+  formSelector?: string
+  options?: any
+}
+
 export class Form {
   validator = null
   isLoading = false
 
-  constructor({ callback, formSelector = '[data-form]', options = {} } = {}) {
+  constructor({ callback, formSelector = '[data-form]', options = {} }: IForm = {}) {
     this.validator = new Validator(formSelector, options)
     if (callback) {
       this.addSubmitEvent(callback)
@@ -19,18 +25,18 @@ export class Form {
   }
 
   addSubmitEvent(callback) {
-    this.validator.submitButton.addEventListener('click', (event) => {
+    this.validator.submitButton.addEventListener('click', (event: Event) => {
       event.preventDefault()
-      if (this.isLoading === false && this.validator.validate()) {
+      if (!this.isLoading && this.validator.validate()) {
         this.setLoading(true)
         callback(event, this.validator.form)
       }
     })
   }
 
-  getFormDataByElements(elementsArray = []) {
+  getFormDataByElements(elementsArray: Array<NodeListOf<any>>) {
     const formData = {}
-    elementsArray.forEach((input) => {
+    elementsArray.forEach((input: any) => {
       const { value, name } = input
       formData[name] = value
     })
@@ -49,19 +55,19 @@ export class Form {
 
   setLoading(show = true) {
     const loading = this.validator.submitButton.querySelector(`.${ClassMap.loading}`)
-    if (show === false && loading) {
+    if (!show && loading) {
       this.isLoading = false
       loading.remove()
     } else if (show && !loading) {
       this.isLoading = true
-      const newLoading = document.createElement('span')
+      const newLoading: HTMLSpanElement = document.createElement('span')
       newLoading.classList.add(ClassMap.loading)
       this.validator.submitButton.insertAdjacentElement('afterbegin', newLoading)
     }
   }
 
-  setFieldValue(fieldName, value) {
-    const input = document.querySelector(`input[name="${fieldName}"]`)
+  setFieldValue(fieldName: string, value: any) {
+    const input: HTMLInputElement = document.querySelector(`input[name="${fieldName}"]`)
     if (input) {
       input.value = value
       const inputRow = input.closest(ClassMap.jsFloatField)

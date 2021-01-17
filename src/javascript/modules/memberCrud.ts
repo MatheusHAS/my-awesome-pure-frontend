@@ -1,8 +1,9 @@
 import { LocalStorage } from '@/javascript/modules'
 import { stateKeyName } from '@/javascript/config'
+import { IMember } from '@/javascript/interfaces/IMember'
 
 export const createMember = (data) => {
-  const members = LocalStorage.getItem(stateKeyName)
+  const members: IMember[] = LocalStorage.getItem(stateKeyName)
   if (!members) {
     LocalStorage.setItem(stateKeyName, [{ ...data }])
   } else {
@@ -22,13 +23,13 @@ export const removeMemberByEmail = (email) => {
 }
 
 export const updateMemberByEmail = (email, data) => {
-  let members = LocalStorage.getItem(stateKeyName)
+  const members: IMember[] = LocalStorage.getItem(stateKeyName)
   if (!members) {
     return
   } else {
-    const searchMember = members.filter((member) => member.email === email)
-    let member = searchMember?.shift()
-    const currentMemberIndex = members.indexOf(member)
+    const searchMember: IMember[] = members.filter((member) => member.email === email)
+    const member = searchMember?.shift()
+    const currentMemberIndex: number = members.indexOf(member)
     members[currentMemberIndex] = {
       ...member,
       ...data,
@@ -38,11 +39,11 @@ export const updateMemberByEmail = (email, data) => {
 }
 
 export const getMemberByEmail = (email) => {
-  let members = LocalStorage.getItem(stateKeyName)
+  const members: IMember[] = LocalStorage.getItem(stateKeyName)
   if (!members) {
     return null
   } else {
-    let searchMember = members.filter((member) => member.email === email)
+    const searchMember: IMember[] = members.filter((member) => member.email === email)
     return searchMember?.shift()
   }
 }

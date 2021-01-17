@@ -4,21 +4,39 @@ const ALLOWED_ATTRIBUTES = ['minlength', 'maxlength']
 const ValidationDataPrefix = 'data-validate-'
 const ValidationMessageSufix = '-message'
 
-export class Validator {
-  form = null
-  submitButton = null
-  formIsValid = false
-  errorMessageSelector = '[data-error-message]'
-  rowSelector = '[data-field-row]'
-  inputSelector = '[data-field-input]'
-  errorClass = 'has-error'
-  successClass = 'has-success'
-  validateEvent = 'keyup'
-  disabledClass = 'c-button--disabled'
-  clearOnEmpty = true
-  inputs = []
+interface IValidatorOptions {
+  errorMessageSelector?: string
+  disabledClass?: string
+  rowSelector?: string
+  errorClass?: string
+  successClass?: string
+  clearOnEmpty?: boolean
+  validateEvent?: string
+}
 
-  constructor(formSelector, options = {}) {
+interface IValidatorInput {
+  name: string
+  input: HTMLInputElement
+  error: HTMLElement
+  row: Element
+  rules: any[]
+}
+
+export class Validator {
+  form: Element | HTMLFormElement | null = null
+  submitButton: Element | HTMLElement | null = null
+  formIsValid: boolean = false
+  errorMessageSelector: string = '[data-error-message]'
+  rowSelector: string = '[data-field-row]'
+  inputSelector: string = '[data-field-input]'
+  errorClass: string = 'has-error'
+  successClass: string = 'has-success'
+  validateEvent: string = 'keyup'
+  disabledClass: string = 'c-button--disabled'
+  clearOnEmpty: boolean = true
+  inputs: IValidatorInput[] = []
+
+  constructor(formSelector: string, options: IValidatorOptions = {}) {
     this.form = document.querySelector(formSelector || '[data-form]')
     this.form?.setAttribute('novalidate', 'true')
     if (!this.form) {
@@ -66,7 +84,7 @@ export class Validator {
     this.submitButton.classList.toggle(this.disabledClass, !this.formIsValid)
   }
 
-  _addValidateEventOnInput(inputField, event) {
+  _addValidateEventOnInput(inputField: HTMLElement, event: any) {
     inputField.addEventListener(this.validateEvent, event)
   }
 
@@ -102,7 +120,7 @@ export class Validator {
     })
   }
 
-  validateField(inputRow, silent = false) {
+  validateField(inputRow: IValidatorInput, silent = false) {
     const { value, name } = inputRow.input
     const { rules } = inputRow
     return rules.every((rule) => {
@@ -120,7 +138,7 @@ export class Validator {
 
   validate(silent = false) {
     const validations = this.inputs.map((inputRow) => this.validateField(inputRow, silent))
-    const isValid = validations.filter((isValid) => isValid === false)
+    const isValid = validations.filter((isValid) => !isValid)
     this.formIsValid = isValid.length === 0
     return this.formIsValid
   }
@@ -130,14 +148,14 @@ export class Validator {
       console.warn('The form dont be null or undefined')
       return
     }
-    const inputs = document.querySelectorAll(this.rowSelector)
+    const inputs: NodeListOf<Element> = document.querySelectorAll(this.rowSelector)
     inputs.forEach((inputRow) => {
-      const inputField = inputRow.querySelector(this.inputSelector)
+      const inputField: HTMLInputElement = inputRow.querySelector(this.inputSelector)
       if (inputField.hasAttribute('disabled') || inputField.type === 'hidden') {
         return
       }
       const inputFieldName = inputField.getAttribute('name')
-      const errorField = inputRow.querySelector(this.errorMessageSelector)
+      const errorField: HTMLElement = inputRow.querySelector(this.errorMessageSelector)
       this.inputs.push({
         name: inputFieldName,
         input: inputField,
@@ -148,7 +166,7 @@ export class Validator {
     })
   }
 
-  _setErrorMessage(fieldName, message) {
+  _setErrorMessage(fieldName: string, message: string) {
     const inputField = this.inputs.filter((input) => input.name === fieldName)?.shift()
     if (!inputField) {
       console.warn(`[_setErrorMessage]: '${fieldName}' field don't exists on mapped inputs.`)
@@ -158,7 +176,7 @@ export class Validator {
     inputField.error.innerText = message
   }
 
-  _clearMessageError(fieldName) {
+  _clearMessageError(fieldName: string) {
     const inputField = this.inputs.filter((input) => input.name === fieldName)?.shift()
     if (!inputField) {
       console.warn(`[_clearMessageError]: '${fieldName}' field don't exists on mapped inputs.`)

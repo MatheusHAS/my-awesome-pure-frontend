@@ -1,5 +1,6 @@
 import { LocalStorage, Formatter } from '@/javascript/modules'
 import { removeMemberByEmail } from '@/javascript/modules/memberCrud'
+import { IMember } from '@/javascript/interfaces/IMember'
 import { stateKeyName } from '@/javascript/config'
 
 const elements = {
@@ -25,7 +26,7 @@ const loadMembersList = () => {
     elements.list.innerHTML = ''
     const contentFragment = document.createDocumentFragment()
 
-    memberList.forEach((member) => {
+    memberList.forEach((member: IMember) => {
       const newCard = createCardItem(member)
       contentFragment.append(newCard)
     })
@@ -36,14 +37,14 @@ const loadMembersList = () => {
   }
 }
 
-const onRemoveMember = (email) => {
+const onRemoveMember = (email: string) => {
   if (confirm('Você gostaria de apagar o membro selecionado?')) {
     removeMemberByEmail(email)
     loadMembersList()
   }
 }
 
-const createCardItem = (member) => {
+const createCardItem = (member: IMember) => {
   const { name, email, cpf, phone } = member
 
   const mainElement = document.createElement('div')

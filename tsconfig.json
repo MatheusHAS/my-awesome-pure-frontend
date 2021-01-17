@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "module": "commonjs",
-    "target": "es2019",
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "esModuleInterop": true,
-    "allowJs": true,
-    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "types": ["node", "jest"],
+    "rootDir": "src",
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"]
     },
+    "allowJs": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": ["src"],
+  "exclude": ["src/test/cypress"]
 }
