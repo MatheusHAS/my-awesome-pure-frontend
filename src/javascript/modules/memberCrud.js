@@ -20,3 +20,30 @@ export const removeMemberByEmail = (email) => {
     LocalStorage.setItem(stateKeyName, members)
   }
 }
+
+export const updateMemberByEmail = (email, data) => {
+  let members = LocalStorage.getItem(stateKeyName)
+  if (!members) {
+    return
+  } else {
+    const searchMember = members.filter((member) => member.email === email)
+    let member = searchMember?.shift()
+    const currentMemberIndex = members.indexOf(member)
+    console.log(currentMemberIndex)
+    members[currentMemberIndex] = {
+      ...member,
+      ...data,
+    }
+    LocalStorage.setItem(stateKeyName, members)
+  }
+}
+
+export const getMemberByEmail = (email) => {
+  let members = LocalStorage.getItem(stateKeyName)
+  if (!members) {
+    return null
+  } else {
+    let searchMember = members.filter((member) => member.email === email)
+    return searchMember?.shift()
+  }
+}

@@ -52,6 +52,10 @@ const createCardItem = (member) => {
   const header = document.createElement('div')
   header.classList.add(options.cardList.header)
 
+  const headerEditLink = document.createElement('a')
+  headerEditLink.innerText = 'Editar'
+  headerEditLink.href = `/update.html?email=${email}`
+
   const headerRemoveLink = document.createElement('a')
   headerRemoveLink.innerText = 'Remover'
   headerRemoveLink.addEventListener('click', (event) => {
@@ -60,6 +64,7 @@ const createCardItem = (member) => {
   })
 
   header.appendChild(headerRemoveLink)
+  header.appendChild(headerEditLink)
   mainElement.appendChild(header)
 
   const content = document.createElement('div')

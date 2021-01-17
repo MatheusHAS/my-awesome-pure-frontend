@@ -58,6 +58,11 @@ export class Validator {
     }
     this._mapInputs()
     this._addValidationEvents()
+    this.formIsValid = this.validate(true)
+    this.checkButton()
+  }
+
+  checkButton() {
     this.submitButton.classList.toggle(this.disabledClass, !this.formIsValid)
   }
 
@@ -88,7 +93,7 @@ export class Validator {
                 this.validateField(inputRow)
               }
               this.formIsValid = this.validate(true)
-              this.submitButton.classList.toggle(this.disabledClass, !this.formIsValid)
+              this.checkButton()
             })
             alreadAddedEvent = true
           }
@@ -115,7 +120,7 @@ export class Validator {
 
   validate(silent = false) {
     const validations = this.inputs.map((inputRow) => this.validateField(inputRow, silent))
-    const isValid = validations.filter((isValid) => isValid == false)
+    const isValid = validations.filter((isValid) => isValid === false)
     this.formIsValid = isValid.length === 0
     return this.formIsValid
   }

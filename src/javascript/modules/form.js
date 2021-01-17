@@ -59,6 +59,15 @@ export class Form {
     }
   }
 
+  setFieldValue(fieldName, value) {
+    const input = document.querySelector(`input[name="${fieldName}"]`)
+    if (input) {
+      input.value = value
+      const inputRow = input.closest(options.fieldRowSelector)
+      inputRow.classList.add(options.dirtyClass)
+    }
+  }
+
   clean() {
     this.validator.form.reset()
     this.validator.inputs.forEach((inputRow) => {
