@@ -10,14 +10,20 @@
     flex: auto;
     padding: 10px;
     max-width: 100%;
+
+    &:hover {
+      .#{$component}__content {
+        border-color: $color-blue-esmerald;
+        background-color: $card-bg-color;
+      }
+    }
   }
 
   &__content {
     padding: 24px;
-    border: 1px solid red;
+    border: 1px solid $card-border-color;
     overflow: hidden;
     border-radius: 8px;
-    background-color: #f1f1f1;
 
     ul {
       display: flex;

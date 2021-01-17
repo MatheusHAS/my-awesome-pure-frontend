@@ -3,7 +3,7 @@
 
 .#{$component} {
   display: flex;
-  background: #ccc;
+  background: $color-blue-esmerald;
   height: 64px;
 
   &__container {
@@ -17,7 +17,18 @@
     display: flex;
     li {
       a {
-        padding: 8px;
+        padding: 6px 8px;
+        text-decoration: none;
+        color: $color-text;
+        border: 1px solid $color-text;
+        margin: auto 4px auto;
+        border-radius: 4px;
+
+        &:hover {
+          color: $color-white;
+          border-color: $color-white;
+          background-color: darken($color-blue-esmerald, 5);
+        }
       }
     }
   }
