@@ -2,7 +2,7 @@ import { LocalStorage } from '@/javascript/modules'
 import { stateKeyName } from '@/javascript/config'
 import { IMember } from '@/javascript/interfaces/IMember'
 
-export const createMember = (data) => {
+export const createMember = (data: IMember) => {
   const members: IMember[] = LocalStorage.getItem(stateKeyName)
   if (!members) {
     LocalStorage.setItem(stateKeyName, [{ ...data }])
@@ -12,7 +12,7 @@ export const createMember = (data) => {
   }
 }
 
-export const removeMemberByEmail = (email) => {
+export const removeMemberByEmail = (email: string) => {
   let members = LocalStorage.getItem(stateKeyName)
   if (!members) {
     return
@@ -22,7 +22,7 @@ export const removeMemberByEmail = (email) => {
   }
 }
 
-export const updateMemberByEmail = (email, data) => {
+export const updateMemberByEmail = (email: string, data: IMember) => {
   const members: IMember[] = LocalStorage.getItem(stateKeyName)
   if (!members) {
     return
@@ -38,7 +38,7 @@ export const updateMemberByEmail = (email, data) => {
   }
 }
 
-export const getMemberByEmail = (email) => {
+export const getMemberByEmail = (email: string) => {
   const members: IMember[] = LocalStorage.getItem(stateKeyName)
   if (!members) {
     return null
