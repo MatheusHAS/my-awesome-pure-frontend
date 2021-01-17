@@ -18,7 +18,7 @@ export class Validator {
   clearOnEmpty = true
   inputs = []
 
-  constructor(formSelector, callback, options = {}) {
+  constructor(formSelector, options = {}) {
     this.form = document.querySelector(formSelector || '[data-form]')
     this.form?.setAttribute('novalidate', 'true')
     if (!this.form) {
@@ -133,6 +133,9 @@ export class Validator {
     const inputs = document.querySelectorAll(this.rowSelector)
     inputs.forEach((inputRow) => {
       const inputField = inputRow.querySelector(this.inputSelector)
+      if (inputField.hasAttribute('disabled') || inputField.type === 'hidden') {
+        return
+      }
       const inputFieldName = inputField.getAttribute('name')
       const errorField = inputRow.querySelector(this.errorMessageSelector)
       this.inputs.push({

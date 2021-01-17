@@ -5,6 +5,13 @@ import Textfield from '@/styles/components/src/textfield/textfield'
 const formInstance = new Form()
 const maker = new Masker()
 
+const getMemberEmailFromParam = () => {
+  const { search } = window.location
+  const urlSearch = new URLSearchParams(search)
+  const memberEmail = urlSearch.get('email')
+  return memberEmail
+}
+
 const actions = {
   create: (event, form) => {
     const { elements } = form
@@ -23,14 +30,15 @@ const actions = {
   },
   update: (event, form) => {
     const { elements } = form
-    const { name, email, cpf, phone } = elements
-    const arrayFields = [name, email, cpf, phone]
+    const { name, cpf, phone } = elements
+    const arrayFields = [name, cpf, phone]
     formInstance.disableFields(true, arrayFields)
     const formData = formInstance.getFormDataByElements(arrayFields)
     setTimeout(() => {
       formData.cpf = formData.cpf.replace(/[^\d]+/g, '')
       formData.phone = formData.phone.replace(/[^\d]+/g, '')
-      updateMemberByEmail(formData.email, formData)
+      const memberEmail = getMemberEmailFromParam()
+      updateMemberByEmail(memberEmail, formData)
       formInstance.disableFields(false, arrayFields)
       formInstance.setLoading(false)
     }, 2000)
@@ -38,9 +46,7 @@ const actions = {
 }
 
 const loadMemberData = () => {
-  const { search } = window.location
-  const urlSearch = new URLSearchParams(search)
-  const memberEmail = urlSearch.get('email')
+  const memberEmail = getMemberEmailFromParam()
   if (!memberEmail) {
     window.location.pathname = '/index.html'
     return

@@ -1,6 +1,6 @@
 import Rules from './rules'
 
-const options = {
+const ClassMap = {
   maskPrefix: 'data-masker-',
 }
 
@@ -11,7 +11,7 @@ export class Masker {
 
   _findFieldsToMask() {
     Object.keys(Rules).forEach((rule) => {
-      const elements = document.querySelectorAll(`[${options.maskPrefix}${rule}]`)
+      const elements = document.querySelectorAll(`[${ClassMap.maskPrefix}${rule}]`)
       elements.forEach((element) => this._applyRules(element, Rules[rule]))
     })
   }

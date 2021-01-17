@@ -1,6 +1,7 @@
 const ClassMap = {
   component: '.js-float-field',
   input: '.js-float-input:not(.is-upgraded)',
+  dirty: 'is-dirty',
 }
 
 const Typings = ['tel', 'numeric']
@@ -27,13 +28,13 @@ const mount = () => {
 
 const delegateEvents = (target) => {
   if (target.closest(ClassMap.component)) {
-    target.closest(ClassMap.component).classList.toggle('is-dirty', dirtyInput(target))
+    target.closest(ClassMap.component).classList.toggle(ClassMap.dirty, dirtyInput(target))
   }
 }
 
 const upgrade = (input) => {
   input.classList.add('is-upgraded')
-  input.closest(ClassMap.component).classList.toggle('is-dirty', dirtyInput(input))
+  input.closest(ClassMap.component).classList.toggle(ClassMap.dirty, dirtyInput(input))
   changeType(input)
 }
 

@@ -29,7 +29,6 @@ export const updateMemberByEmail = (email, data) => {
     const searchMember = members.filter((member) => member.email === email)
     let member = searchMember?.shift()
     const currentMemberIndex = members.indexOf(member)
-    console.log(currentMemberIndex)
     members[currentMemberIndex] = {
       ...member,
       ...data,

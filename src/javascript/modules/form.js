@@ -1,9 +1,10 @@
 import { Validator } from '@/javascript/modules'
 
-const options = {
-  loadingSelector: 'o-loading',
-  fieldRowSelector: '[data-field-row]',
-  dirtyClass: 'is-dirty',
+const ClassMap = {
+  loading: 'o-loading',
+  fieldRow: '[data-field-row]',
+  jsFloatField: '.js-float-field',
+  dirty: 'is-dirty',
 }
 
 export class Form {
@@ -47,14 +48,14 @@ export class Form {
   }
 
   setLoading(show = true) {
-    const loading = this.validator.submitButton.querySelector(`.${options.loadingSelector}`)
+    const loading = this.validator.submitButton.querySelector(`.${ClassMap.loading}`)
     if (show === false && loading) {
       this.isLoading = false
       loading.remove()
     } else if (show && !loading) {
       this.isLoading = true
       const newLoading = document.createElement('span')
-      newLoading.classList.add(options.loadingSelector)
+      newLoading.classList.add(ClassMap.loading)
       this.validator.submitButton.insertAdjacentElement('afterbegin', newLoading)
     }
   }
@@ -63,16 +64,16 @@ export class Form {
     const input = document.querySelector(`input[name="${fieldName}"]`)
     if (input) {
       input.value = value
-      const inputRow = input.closest(options.fieldRowSelector)
-      inputRow.classList.add(options.dirtyClass)
+      const inputRow = input.closest(ClassMap.jsFloatField)
+      inputRow.classList.add(ClassMap.dirty)
     }
   }
 
   clean() {
     this.validator.form.reset()
     this.validator.inputs.forEach((inputRow) => {
-      const fatherElement = inputRow.input.closest(options.fieldRowSelector)
-      fatherElement.classList.remove(options.dirtyClass)
+      const fatherElement = inputRow.input.closest(ClassMap.fieldRow)
+      fatherElement.classList.remove(ClassMap.dirty)
     })
   }
 }

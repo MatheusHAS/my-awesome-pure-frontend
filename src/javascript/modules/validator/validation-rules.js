@@ -1,4 +1,5 @@
 import { regex } from './rules'
+import { getMemberByEmail } from '@/javascript/modules/memberCrud'
 
 const BLOCKED_CPFS = [
   '00000000000',
@@ -20,6 +21,11 @@ export default {
 
   email(value) {
     return regex.isValidEmail.test(value)
+  },
+
+  existemail(value) {
+    const member = getMemberByEmail(value)
+    return !member
   },
 
   minlength(value, min) {
