@@ -1,5 +1,5 @@
 const regex = {
-  routeParam: /\/(?<param>:[^\\/]+)/g,
+  routeParam: /\/(?<param>:[^\\/]+)/,
 }
 
 export class Router {
@@ -11,21 +11,19 @@ export class Router {
     this.currentPath = pathname
   }
 
-  _mapRoutesToAdd(routes) {
-    return routes.map((route) => {
-      let newRoute = route
-      const matchAllResult = newRoute.matchAll(regex.routeParam)
-      for (const result of matchAllResult) {
-        if (result?.groups) {
-          const { param } = result.groups
-          newRoute = newRoute.replace(new RegExp(param, 'g'), '([^/]+)')
-        }
+  _mapRoutesToAdd(routes: string[]) {
+    return routes.map((route: string) => {
+      let newRoute: string = route.toString()
+      const matchResult = newRoute.match(regex.routeParam)
+      if (matchResult?.groups) {
+        const { param } = matchResult.groups
+        newRoute = newRoute.replace(new RegExp(param, 'g'), '([^/]+)')
       }
       return newRoute === '/' ? '^/$' : newRoute
     })
   }
 
-  add(routesPath, callback) {
+  add(routesPath: string[] | string, callback: VoidFunction) {
     const newRoute = this._mapRoutesToAdd(typeof routesPath === 'object' ? routesPath : [routesPath])
     this.routes.push({
       uris: newRoute,
