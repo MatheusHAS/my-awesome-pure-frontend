@@ -1,6 +1,6 @@
 import validationRules from './validation-rules'
 
-const AllowedAttribute = ['minlength', 'maxlength']
+const ALLOWED_ATTRIBUTES = ['minlength', 'maxlength']
 const ValidationDataPrefix = 'data-validate-'
 const ValidationMessageSufix = '-message'
 
@@ -76,7 +76,7 @@ export class Validator {
         if (hasAttribute) {
           inputRow.rules.push({
             validateFunction: validationRules[rule],
-            parameter: AllowedAttribute.includes(rule) ? attributeValue : null,
+            parameter: ALLOWED_ATTRIBUTES.includes(rule) ? attributeValue : null,
             errorMessage: errorMessage || 'Campo inválido',
           })
           if (!alreadAddedEvent) {
@@ -143,7 +143,7 @@ export class Validator {
   _setErrorMessage(fieldName, message) {
     const inputField = this.inputs.filter((input) => input.name === fieldName)?.shift()
     if (!inputField) {
-      console.warn(`[setMessageError]: '${fieldName}' field don't exists on mapped inputs.`)
+      console.warn(`[_setErrorMessage]: '${fieldName}' field don't exists on mapped inputs.`)
       return
     }
     inputField.row.classList.add(this.errorClass)
@@ -153,7 +153,7 @@ export class Validator {
   _clearMessageError(fieldName) {
     const inputField = this.inputs.filter((input) => input.name === fieldName)?.shift()
     if (!inputField) {
-      console.warn(`[setMessageError]: '${fieldName}' field don't exists on mapped inputs.`)
+      console.warn(`[_clearMessageError]: '${fieldName}' field don't exists on mapped inputs.`)
       return
     }
     inputField.row.classList.remove(this.errorClass)
