@@ -47,11 +47,11 @@ const actions: any = {
 
 const loadMemberData = () => {
   const memberEmail = getMemberEmailFromParam()
-  if (!memberEmail) {
+  const member = getMemberByEmail(memberEmail)
+  if (!memberEmail || !member) {
     window.location.pathname = '/index.html'
     return
   }
-  const member = getMemberByEmail(memberEmail)
   formInstance.setFieldValue('name', member.name)
   formInstance.setFieldValue('email', member.email)
   formInstance.setFieldValue('cpf', Formatter.cpf(member.cpf))

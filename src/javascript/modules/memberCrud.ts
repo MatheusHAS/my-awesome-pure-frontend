@@ -24,26 +24,18 @@ export const removeMemberByEmail = (email: string) => {
 
 export const updateMemberByEmail = (email: string, data: IMember) => {
   const members: IMember[] = LocalStorage.getItem(stateKeyName)
-  if (!members) {
-    return
-  } else {
-    const searchMember: IMember[] = members.filter((member) => member.email === email)
-    const member = searchMember?.shift()
-    const currentMemberIndex: number = members.indexOf(member)
-    members[currentMemberIndex] = {
-      ...member,
-      ...data,
-    }
-    LocalStorage.setItem(stateKeyName, members)
+  const searchMember: IMember[] = members.filter((member) => member.email === email)
+  const member = searchMember.shift()
+  const currentMemberIndex: number = members.indexOf(member)
+  members[currentMemberIndex] = {
+    ...member,
+    ...data,
   }
+  LocalStorage.setItem(stateKeyName, members)
 }
 
 export const getMemberByEmail = (email: string) => {
   const members: IMember[] = LocalStorage.getItem(stateKeyName)
-  if (!members) {
-    return null
-  } else {
-    const searchMember: IMember[] = members.filter((member) => member.email === email)
-    return searchMember?.shift()
-  }
+  const searchMember: IMember[] = members.filter((member) => member.email === email)
+  return searchMember.shift()
 }
