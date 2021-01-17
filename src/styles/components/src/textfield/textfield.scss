@@ -22,7 +22,6 @@
     }
 
     &:placeholder-shown ~ .#{$component}__label {
-      font-size: 16px;
       cursor: text;
       top: 27px;
     }
