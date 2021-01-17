@@ -55,4 +55,12 @@ export default {
     if (rev != parseInt(value.charAt(10))) return false
     return true
   },
+
+  phone(value) {
+    value = value.replace(/[^\d]+/g, '')
+    if (!value) {
+      return false
+    }
+    return value.length === 11
+  },
 }
