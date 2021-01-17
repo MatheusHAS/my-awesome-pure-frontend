@@ -1,4 +1,4 @@
-import { LocalStorage } from '@/javascript/modules'
+import { LocalStorage, Formatter } from '@/javascript/modules'
 import { removeMemberByEmail } from '@/javascript/modules/memberCrud'
 import { stateKeyName } from '@/javascript/config'
 
@@ -95,7 +95,7 @@ const createCardItem = (member) => {
   liCpfIcon.innerText = 'ICON'
 
   const liCpfText = document.createElement('span')
-  liCpfText.innerText = cpf
+  liCpfText.innerText = Formatter.cpf(cpf)
 
   liCpf.appendChild(liCpfIcon)
   liCpf.appendChild(liCpfText)
@@ -108,7 +108,7 @@ const createCardItem = (member) => {
   liPhoneIcon.innerText = 'ICON'
 
   const liPhoneText = document.createElement('span')
-  liPhoneText.innerText = phone
+  liPhoneText.innerText = Formatter.phone(phone)
 
   liPhone.appendChild(liPhoneIcon)
   liPhone.appendChild(liPhoneText)
