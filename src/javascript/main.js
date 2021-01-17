@@ -26,8 +26,8 @@ const setInitState = () => {
 }
 
 const checkExistState = () => {
-  const exists = LocalStorage.getItem(stateKeyName)
-  if (!exists) {
+  const memberList = LocalStorage.getItem(stateKeyName)
+  if (!memberList || memberList.length === 0) {
     setInitState()
   }
 }
