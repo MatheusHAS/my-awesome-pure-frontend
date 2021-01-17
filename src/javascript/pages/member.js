@@ -13,8 +13,10 @@ const actions = {
     formInstance.disableFields(true, arrayFields)
     const formData = formInstance.getFormDataByElements(arrayFields)
     setTimeout(() => {
+      formData.cpf = formData.cpf.replace(/[^\d]+/g, '')
+      formData.phone = formData.phone.replace(/[^\d]+/g, '')
       createMember(formData)
-      formInstance.validator.form.reset()
+      formInstance.clean()
       formInstance.disableFields(false, arrayFields)
       formInstance.setLoading(false)
     }, 2000)

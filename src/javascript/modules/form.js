@@ -2,6 +2,8 @@ import { Validator } from '@/javascript/modules'
 
 const options = {
   loadingSelector: 'o-loading',
+  fieldRowSelector: '[data-field-row]',
+  dirtyClass: 'is-dirty',
 }
 
 export class Form {
@@ -55,5 +57,13 @@ export class Form {
       newLoading.classList.add(options.loadingSelector)
       this.validator.submitButton.insertAdjacentElement('afterbegin', newLoading)
     }
+  }
+
+  clean() {
+    this.validator.form.reset()
+    this.validator.inputs.forEach((inputRow) => {
+      const fatherElement = inputRow.input.closest(options.fieldRowSelector)
+      fatherElement.classList.remove(options.dirtyClass)
+    })
   }
 }
