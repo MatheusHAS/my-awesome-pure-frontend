@@ -21,7 +21,7 @@ const actions: any = {
       formInstance.clean()
       formInstance.disableFields(false, arrayFields)
       formInstance.setLoading(false)
-      Toast.show({
+      Toast.notify({
         message: 'Membro criado com sucesso!',
         type: 'success',
       })
@@ -40,7 +40,7 @@ const actions: any = {
       updateMemberByEmail(memberEmail, formData)
       formInstance.disableFields(false, arrayFields)
       formInstance.setLoading(false)
-      Toast.show({
+      Toast.notify({
         message: 'Dados atualizados com sucesso!',
         type: 'success',
       })

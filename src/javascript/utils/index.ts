@@ -26,7 +26,7 @@ const loadMembersList = (elementList: any) => {
     memberList.forEach((member: IMember) => {
       const newCard = createCardItem(member, () => {
         onRemoveMember(member.email, () => {
-          Toast.show({
+          Toast.notify({
             message: 'Membro excluido!',
             type: 'error',
           })

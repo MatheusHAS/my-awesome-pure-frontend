@@ -24,7 +24,7 @@ const eventOnCloseClick = (event) => {
   }, 500)
 }
 
-const MakeToast = ({ title, message, type, iconHTML }: IToastMaker) => {
+const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
   const component = document.createElement('div')
   component.classList.add(...[ClassMap.component, `is-${type}`])
 
@@ -75,8 +75,8 @@ const MakeToastListBox = () => {
 }
 
 const Toast = {
-  show(options: IToastMaker) {
-    const elementToast = MakeToast(options)
+  notify(options: IToastMaker) {
+    const elementToast = MakeToastElement(options)
 
     let elementToastList = document.querySelector(`.${ClassMap.toastList}`)
     if (elementToastList) {
