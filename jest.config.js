@@ -4,7 +4,6 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/**/index.ts',
     '!<rootDir>/src/**/rules.ts',
-    '!<rootDir>/src/**/validation-rules.ts',
     '!<rootDir>/src/**/pages/*.ts',
     '!<rootDir>/src/**/(main|config).ts',
   ],
