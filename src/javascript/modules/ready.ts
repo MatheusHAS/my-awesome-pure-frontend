@@ -1,6 +1,7 @@
 const ready = (callback) => {
   if (typeof callback !== 'function') return
 
+  /* istanbul ignore else */
   if (document.readyState === 'interactive' || document.readyState === 'complete') {
     return callback()
   }

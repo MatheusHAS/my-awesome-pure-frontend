@@ -43,7 +43,7 @@ export class Form {
     return formData
   }
 
-  disableFields(disabled = true, inputs = []) {
+  disableFields(disabled: boolean, inputs: HTMLInputElement[]) {
     inputs.forEach((input) => {
       if (disabled) {
         input.setAttribute('disabled', 'true')
@@ -53,7 +53,7 @@ export class Form {
     })
   }
 
-  setLoading(show = true) {
+  setLoading(show: boolean) {
     const loading = this.validator.submitButton.querySelector(`.${ClassMap.loading}`)
     if (!show && loading) {
       this.isLoading = false
@@ -68,6 +68,8 @@ export class Form {
 
   setFieldValue(fieldName: string, value: any) {
     const input: HTMLInputElement = document.querySelector(`input[name="${fieldName}"]`)
+
+    /* istanbul ignore else */
     if (input) {
       input.value = value
       const inputRow = input.closest(ClassMap.jsFloatField)
