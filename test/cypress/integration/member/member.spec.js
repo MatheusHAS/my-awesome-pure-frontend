@@ -40,7 +40,14 @@ context('Member', () => {
     cy.getByTestId('message-phone').should('be.text', 'Telefone inválido')
     cy.getByTestId('textfield-phone').clear().type('18912344321')
     cy.getByTestId('message-phone').should('be.text', '')
-    cy.getByTestId('submit').should('be.not.disabled').click()
+
+    cy.getByTestId('submit')
+      .then((element) => {
+        expect(element.hasClass('c-textfield--disabled')).to.be.false
+      })
+      .click()
+
+    // cy.getByTestId('submit').should('be.not.disabled').click()
     cy.wait(1000)
 
     cy.getByTestId('toast-message').should('be.text', 'Membro criado com sucesso!')
@@ -56,11 +63,18 @@ context('Member', () => {
     })
     cy.getByTestId('textfield-name').should('be.value', 'My name 1')
     cy.getByTestId('message-name').should('be.text', 'Nome inválido')
+
     cy.getByTestId('textfield-email').should('be.disabled')
-    cy.getByTestId('submit').should('be.disabled')
+    // cy.getByTestId('submit').should('be.disabled')
 
     cy.getByTestId('textfield-name').clear().type('matheus azambuja')
-    cy.getByTestId('submit').should('be.not.disabled').click()
+
+    cy.getByTestId('submit')
+      .then((element) => {
+        expect(element.hasClass('c-textfield--disabled')).to.be.false
+      })
+      .click()
+    // cy.getByTestId('submit').should('be.not.disabled').click()
 
     cy.wait(1000)
     cy.getByTestId('toast-message').should('be.text', 'Dados atualizados com sucesso!')

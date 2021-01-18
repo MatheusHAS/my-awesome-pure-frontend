@@ -78,7 +78,7 @@ export class Validator {
 
   checkButton() {
     this.submitButton.classList.toggle(this.disabledClass, !this.formIsValid)
-    this.submitButton.toggleAttribute('disabled', !this.formIsValid)
+    // this.submitButton.toggleAttribute('disabled', !this.formIsValid)
   }
 
   _addValidateEventOnInput(inputField: HTMLElement, event: any) {
