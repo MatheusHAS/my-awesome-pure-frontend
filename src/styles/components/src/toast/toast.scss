@@ -1,0 +1,56 @@
+@import './src/mixins';
+@import './src/variables';
+
+/*
+  <div class="c-toast">
+    <div class="u-flex-column">
+      <div class="c-toast__icon"></div>
+      <div class="u-flex-column">
+        <div class="c-toast__title">Sucesso!</div>
+        <div class="c-toast__text">Dados gravados com sucesso!</div>
+      </div>
+    </div>
+  </div>
+*/
+
+.#{$component} {
+  display: flex;
+  flex-flow: nowrap;
+  padding: 18px 40px 18px 18px;
+  max-width: 90vw;
+  border-radius: 8px;
+  z-index: 9999;
+
+  &.is-success {
+  }
+
+  &.is-error {
+  }
+
+  &.is-warning {
+  }
+
+  &.active {
+    position: absolute;
+    right: 24px;
+  }
+
+  background-color: $color-blue-esmerald;
+
+  &__icon {
+    font-size: 32px;
+  }
+
+  &__close {
+    position: absolute;
+    right: -25px;
+    bottom: 0;
+    top: 0;
+    font-size: 1.4em;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: darken($color-blue-esmerald, 3);
+  }
+}
