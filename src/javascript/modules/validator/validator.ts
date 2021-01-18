@@ -136,6 +136,16 @@ export class Validator {
     const validations = this.inputs.map((inputRow) => this.validateField(inputRow, false))
     const isValid = validations.filter((isValid) => !isValid)
     this.formIsValid = isValid.length === 0
+    if (!this.formIsValid) {
+      let focusOnFirstField = false
+      validations.forEach((isValid, index: number) => {
+        if (!isValid && !focusOnFirstField) {
+          this.inputs[index].input.focus()
+          focusOnFirstField = true
+        }
+        return
+      })
+    }
     return this.formIsValid
   }
 
