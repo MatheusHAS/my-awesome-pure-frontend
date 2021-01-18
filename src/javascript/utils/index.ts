@@ -61,6 +61,7 @@ const createCardItem = (member: IMember, removeCallback: VoidFunction) => {
   const headerEditLink = document.createElement('a')
   headerEditLink.innerText = 'Editar'
   headerEditLink.href = `/update.html?email=${email}`
+  headerEditLink.setAttribute('data-testid', 'link-edit')
 
   const headerRemoveLink = document.createElement('a')
   headerRemoveLink.innerText = 'Remover'
@@ -68,6 +69,7 @@ const createCardItem = (member: IMember, removeCallback: VoidFunction) => {
     event.preventDefault()
     removeCallback()
   })
+  headerRemoveLink.setAttribute('data-testid', 'link-remove')
 
   header.appendChild(headerRemoveLink)
   header.appendChild(headerEditLink)

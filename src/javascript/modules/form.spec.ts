@@ -32,8 +32,7 @@ describe('Testing [Form] module', () => {
     const formInstance = new Form({ callback })
     formInstance.addSubmitEvent(callback)
 
-    formInstance.setFieldValue('name', 'matheus azambuja')
-
+    userEvent.type(formInstance.validator.inputs[0].input, 'matheus azambuja')
     userEvent.click(formInstance.validator.submitButton)
     expect(callback).toBeCalled()
   })
@@ -73,7 +72,6 @@ describe('Testing [Form] module', () => {
     formInstance.setLoading(false)
     loadingElement = formInstance.validator.submitButton.querySelector('.o-loading')
     expect(loadingElement).toBeNull()
-    // formInstance.setLoading(false)
     expect(formInstance.isLoading).toBe(false)
   })
 })

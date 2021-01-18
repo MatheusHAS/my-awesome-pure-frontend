@@ -1,9 +1,12 @@
 {
-  "extends": ["standard-with-typescript", "plugin:prettier/recommended"],
+  "extends": ["standard-with-typescript", "plugin:prettier/recommended", "plugin:cypress/recommended"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "parser": "@typescript-eslint/parser",
+  "env": {
+    "cypress/globals": true
+  },
   "rules": {
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
@@ -23,5 +26,5 @@
     "no-useless-return": "off",
     "prettier/prettier": "error"
   },
-  "plugins": ["prettier"]
+  "plugins": ["prettier", "cypress"]
 }

@@ -15,5 +15,5 @@
     "resolveJsonModule": true
   },
   "include": ["src"],
-  "exclude": ["src/test/cypress"]
+  "exclude": ["test/cypress"]
 }

@@ -78,6 +78,7 @@ export class Validator {
 
   checkButton() {
     this.submitButton.classList.toggle(this.disabledClass, !this.formIsValid)
+    this.submitButton.toggleAttribute('disabled', !this.formIsValid)
   }
 
   _addValidateEventOnInput(inputField: HTMLElement, event: any) {
@@ -136,6 +137,7 @@ export class Validator {
     const validations = this.inputs.map((inputRow) => this.validateField(inputRow, false))
     const isValid = validations.filter((isValid) => !isValid)
     this.formIsValid = isValid.length === 0
+    /* istanbul ignore else */
     if (!this.formIsValid) {
       let focusOnFirstField = false
       validations.forEach((isValid, index: number) => {

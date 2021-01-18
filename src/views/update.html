@@ -6,7 +6,7 @@
   </div>
   <div class="o-row">
     <div class="o-column o-column-12@xs o-column-3@sm o-column-3@md">
-      <form data-form="update" action="#" method="POST" novalidate="true">
+      <form data-form="update" action="#" method="POST" novalidate="true" data-testid="update-form">
         <div class="c-textfield js-float-field" data-field-row>
           <input
             type="text"
@@ -14,6 +14,7 @@
             placeholder=""
             class="c-textfield__input"
             autocomplete="off"
+            data-testid="textfield-name"
             data-field-input
             data-validate-name
             data-validate-name-message="Nome inválido"
@@ -22,8 +23,10 @@
             data-validate-maxlength="80"
             data-validate-maxlength-message="O campo pode ter no máximo 80 caracteres"
           />
-          <label for="name" class="c-textfield__label js-float-input">Nome completo (sem abreviações)</label>
-          <span class="c-textfield__helper" data-error-message></span>
+          <label for="name" data-testid="label-name" class="c-textfield__label js-float-input"
+            >Nome completo (sem abreviações)</label
+          >
+          <span class="c-textfield__helper" data-testid="message-name" data-error-message></span>
         </div>
         <div class="c-textfield js-float-field">
           <input
@@ -32,10 +35,11 @@
             class="c-textfield__input"
             placeholder=""
             autocomplete="off"
+            data-testid="textfield-email"
             disabled="disabled"
           />
-          <label for="name" class="c-textfield__label js-float-input">E-mail</label>
-          <span class="c-textfield__helper" data-error-message></span>
+          <label for="email" data-testid="label-email" class="c-textfield__label js-float-input">E-mail</label>
+          <span class="c-textfield__helper" data-testid="message-email" data-error-message></span>
         </div>
         <div class="c-textfield js-float-field" data-field-row>
           <input
@@ -44,13 +48,14 @@
             placeholder=""
             class="c-textfield__input"
             autocomplete="off"
+            data-testid="textfield-cpf"
             data-masker-cpf
             data-field-input
             data-validate-cpf
             data-validate-cpf-message="Digite um CPF válido"
           />
-          <label for="name" class="c-textfield__label js-float-input">CPF</label>
-          <span class="c-textfield__helper" data-error-message></span>
+          <label for="cpf" data-testid="label-cpf" class="c-textfield__label js-float-input">CPF</label>
+          <span class="c-textfield__helper" data-testid="message-cpf" data-error-message></span>
         </div>
         <div class="c-textfield js-float-field" data-field-row>
           <input
@@ -58,18 +63,19 @@
             name="phone"
             placeholder=""
             class="c-textfield__input"
+            data-testid="textfield-phone"
             autocomplete="off"
             data-masker-phone
             data-field-input
             data-validate-phone
             data-validate-phone-message="Telefone inválido"
           />
-          <label for="name" class="c-textfield__label js-float-input">Telefone</label>
-          <span class="c-textfield__helper" data-error-message></span>
+          <label for="phone" data-testid="label-phone" class="c-textfield__label js-float-input">Telefone</label>
+          <span class="c-textfield__helper" data-testid="message-phone" data-error-message></span>
         </div>
         <div class="o-row">
           <div class="o-column o-column-12@xs o-column-12@sm o-column-12@md">
-            <button type="submit" class="c-button c-button--primary u-w-100">
+            <button type="submit" data-testid="submit" class="c-button c-button--primary u-w-100">
               <div class="c-button__text">Atualizar dados</div>
             </button>
           </div>

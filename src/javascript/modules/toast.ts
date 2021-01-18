@@ -27,6 +27,7 @@ const eventOnCloseClick = (event) => {
 const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
   const component = document.createElement('div')
   component.classList.add(...[ClassMap.component, `is-${type}`])
+  component.setAttribute('data-testid', 'toast')
 
   const container = document.createElement('div')
   container.classList.add(...['u-flex', 'u-flex-row', 'u-w-100', 'u-relative'])
@@ -47,6 +48,7 @@ const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
     const spanTitle = document.createElement('span')
     spanTitle.classList.add('u-fs-18')
     spanTitle.innerText = title
+    spanTitle.setAttribute('data-testid', 'toast-title')
     content.appendChild(spanTitle)
   }
 
@@ -55,6 +57,7 @@ const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
     const spanMessage = document.createElement('span')
     spanMessage.classList.add('u-fs-15')
     spanMessage.innerText = message
+    spanMessage.setAttribute('data-testid', 'toast-message')
     content.appendChild(spanMessage)
   }
 
@@ -62,6 +65,7 @@ const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
   closeButton.classList.add(...['o-button', ClassMap.closeButton])
   closeButton.innerText = 'x'
   closeButton.addEventListener('click', eventOnCloseClick)
+  closeButton.setAttribute('data-testid', 'toast-close')
 
   container.appendChild(content)
   container.appendChild(closeButton)
