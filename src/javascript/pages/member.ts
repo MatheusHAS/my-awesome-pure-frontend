@@ -1,16 +1,10 @@
 import { Form, Masker, Formatter } from '@/javascript/modules'
 import { createMember, getMemberByEmail, updateMemberByEmail } from '@/javascript/modules/memberCrud'
 import Textfield from '@/styles/components/src/textfield/textfield'
+import { getMemberEmailFromParam } from '@/javascript/utils'
 
 const formInstance = new Form()
-const maker = new Masker()
-
-const getMemberEmailFromParam = () => {
-  const { search } = window.location
-  const urlSearch = new URLSearchParams(search)
-  const memberEmail = urlSearch.get('email')
-  return memberEmail
-}
+const masker = new Masker()
 
 const actions: any = {
   create: (event: VoidFunction, form: HTMLFormElement) => {
