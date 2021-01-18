@@ -2,6 +2,7 @@ import { LocalStorage, Formatter } from '@/javascript/modules'
 import { removeMemberByEmail } from '@/javascript/modules/memberCrud'
 import { IMember } from '@/javascript/interfaces/IMember'
 import { stateKeyName } from '@/javascript/config'
+import Toast from '@/styles/components/src/toast/toast'
 
 const options = {
   cardList: {
@@ -25,6 +26,10 @@ const loadMembersList = (elementList: any) => {
     memberList.forEach((member: IMember) => {
       const newCard = createCardItem(member, () => {
         onRemoveMember(member.email, () => {
+          Toast.show({
+            message: 'Membro excluido!',
+            type: 'error',
+          })
           loadMembersList(elementList)
         })
       })

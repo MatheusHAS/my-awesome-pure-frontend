@@ -2,6 +2,7 @@ import { Form, Masker, Formatter } from '@/javascript/modules'
 import { createMember, getMemberByEmail, updateMemberByEmail } from '@/javascript/modules/memberCrud'
 import Textfield from '@/styles/components/src/textfield/textfield'
 import { getMemberEmailFromParam } from '@/javascript/utils'
+import Toast from '@/styles/components/src/toast/toast'
 
 const formInstance = new Form()
 const masker = new Masker()
@@ -20,6 +21,10 @@ const actions: any = {
       formInstance.clean()
       formInstance.disableFields(false, arrayFields)
       formInstance.setLoading(false)
+      Toast.show({
+        message: 'Membro criado com sucesso!',
+        type: 'success',
+      })
     }, 2000)
   },
   update: (event: VoidFunction, form: HTMLFormElement) => {
@@ -35,6 +40,10 @@ const actions: any = {
       updateMemberByEmail(memberEmail, formData)
       formInstance.disableFields(false, arrayFields)
       formInstance.setLoading(false)
+      Toast.show({
+        message: 'Dados atualizados com sucesso!',
+        type: 'success',
+      })
     }, 2000)
   },
 }

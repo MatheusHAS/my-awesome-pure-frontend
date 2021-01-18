@@ -17,25 +17,45 @@
   display: flex;
   flex-flow: nowrap;
   padding: 18px 40px 18px 18px;
-  max-width: 90vw;
   border-radius: 8px;
-  z-index: 9999;
 
   &.is-success {
+    background-color: $color-blue-esmerald;
+    &:hover {
+      background-color: darken($color-blue-esmerald, 3);
+    }
   }
 
   &.is-error {
+    background-color: $color-error;
+    &:hover {
+      background-color: darken($color-error, 3);
+    }
   }
 
   &.is-warning {
+    background-color: $color-warning;
+    &:hover {
+      background-color: darken($color-warning, 3);
+    }
   }
 
-  &.active {
+  &.on-removing {
+    animation: fadeout 0.5s;
+  }
+
+  &__list {
+    display: flex;
+    flex-flow: column-reverse;
     position: absolute;
     right: 24px;
+    top: 90px;
+    max-width: 90vw;
+    z-index: 9999;
+    > div {
+      margin: 6px;
+    }
   }
-
-  background-color: $color-blue-esmerald;
 
   &__icon {
     font-size: 32px;
@@ -45,12 +65,22 @@
     position: absolute;
     right: -25px;
     bottom: 0;
-    top: 0;
+    top: -8px;
     font-size: 1.4em;
     font-weight: 500;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
+}
 
-  &:hover {
-    background-color: darken($color-blue-esmerald, 3);
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

@@ -13,6 +13,8 @@
 
 body {
   background-color: $color-bg-gray;
+  display: flex;
+  flex-flow: column;
 }
 
 span,
