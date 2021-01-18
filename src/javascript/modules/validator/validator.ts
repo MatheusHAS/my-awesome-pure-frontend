@@ -36,13 +36,9 @@ export class Validator {
   clearOnEmpty: boolean = true
   inputs: IValidatorInput[] = []
 
-  constructor(formSelector: string, options: IValidatorOptions = {}) {
+  constructor(formSelector: string, options: IValidatorOptions) {
     this.form = document.querySelector(formSelector || '[data-form]')
-    this.form?.setAttribute('novalidate', 'true')
-    if (!this.form) {
-      console.warn('Check if form exists or remove the validation dependecy.')
-      return
-    }
+    this.form.setAttribute('novalidate', 'true')
     this.submitButton = this.form.querySelector('[type="submit"]')
     const {
       errorMessageSelector,
@@ -76,7 +72,7 @@ export class Validator {
     }
     this._mapInputs()
     this._addValidationEvents()
-    this.formIsValid = this.validate(true)
+    this.formIsValid = this.validateSilent()
     this.checkButton()
   }
 
@@ -104,13 +100,13 @@ export class Validator {
           })
           if (!alreadAddedEvent) {
             this._addValidateEventOnInput(inputRow.input, (event) => {
-              const { value } = event.target
+              const { value } = event.target as HTMLInputElement
               if (this.clearOnEmpty && value.length === 0) {
                 this._clearMessageError(inputRow.name)
               } else {
                 this.validateField(inputRow)
               }
-              this.formIsValid = this.validate(true)
+              this.formIsValid = this.validateSilent()
               this.checkButton()
             })
             alreadAddedEvent = true
@@ -136,18 +132,21 @@ export class Validator {
     })
   }
 
-  validate(silent = false) {
-    const validations = this.inputs.map((inputRow) => this.validateField(inputRow, silent))
+  validate() {
+    const validations = this.inputs.map((inputRow) => this.validateField(inputRow, false))
+    const isValid = validations.filter((isValid) => !isValid)
+    this.formIsValid = isValid.length === 0
+    return this.formIsValid
+  }
+
+  validateSilent() {
+    const validations = this.inputs.map((inputRow) => this.validateField(inputRow, true))
     const isValid = validations.filter((isValid) => !isValid)
     this.formIsValid = isValid.length === 0
     return this.formIsValid
   }
 
   _mapInputs() {
-    if (!this.form) {
-      console.warn('The form dont be null or undefined')
-      return
-    }
     const inputs: NodeListOf<Element> = document.querySelectorAll(this.rowSelector)
     inputs.forEach((inputRow) => {
       const inputField: HTMLInputElement = inputRow.querySelector(this.inputSelector)
@@ -167,21 +166,13 @@ export class Validator {
   }
 
   _setErrorMessage(fieldName: string, message: string) {
-    const inputField = this.inputs.filter((input) => input.name === fieldName)?.shift()
-    if (!inputField) {
-      console.warn(`[_setErrorMessage]: '${fieldName}' field don't exists on mapped inputs.`)
-      return
-    }
+    const inputField = this.inputs.filter((input) => input.name === fieldName).shift()
     inputField.row.classList.add(this.errorClass)
     inputField.error.innerText = message
   }
 
   _clearMessageError(fieldName: string) {
-    const inputField = this.inputs.filter((input) => input.name === fieldName)?.shift()
-    if (!inputField) {
-      console.warn(`[_clearMessageError]: '${fieldName}' field don't exists on mapped inputs.`)
-      return
-    }
+    const inputField = this.inputs.filter((input) => input.name === fieldName).shift()
     inputField.row.classList.remove(this.errorClass)
     inputField.error.innerText = ''
   }
