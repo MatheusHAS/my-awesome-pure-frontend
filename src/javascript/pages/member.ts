@@ -2,7 +2,7 @@ import { Form, Masker, Formatter } from '@/javascript/modules'
 import { createMember, getMemberByEmail, updateMemberByEmail } from '@/javascript/modules/memberCrud'
 import Textfield from '@/styles/components/src/textfield/textfield'
 import { getMemberEmailFromParam } from '@/javascript/utils'
-import Toast from '@/styles/components/src/toast/toast'
+import Toast from '@/javascript/modules/toast'
 
 const formInstance = new Form()
 const masker = new Masker()

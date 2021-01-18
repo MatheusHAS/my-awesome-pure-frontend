@@ -2,7 +2,7 @@ import { LocalStorage, Formatter } from '@/javascript/modules'
 import { removeMemberByEmail } from '@/javascript/modules/memberCrud'
 import { IMember } from '@/javascript/interfaces/IMember'
 import { stateKeyName } from '@/javascript/config'
-import Toast from '@/styles/components/src/toast/toast'
+import Toast from '@/javascript/modules/toast'
 
 const options = {
   cardList: {

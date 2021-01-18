@@ -31,6 +31,7 @@ const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
   const container = document.createElement('div')
   container.classList.add(...['u-flex', 'u-flex-row', 'u-w-100', 'u-relative'])
 
+  /* istanbul ignore else */
   if (iconHTML) {
     const icon = document.createElement('div')
     icon.classList.add(...[ClassMap.icon, 'u-mr-12'])
@@ -41,6 +42,7 @@ const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
   const content = document.createElement('div')
   content.classList.add(...['u-flex', 'u-flex-column'])
 
+  /* istanbul ignore else */
   if (title) {
     const spanTitle = document.createElement('span')
     spanTitle.classList.add('u-fs-18')
@@ -48,6 +50,7 @@ const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
     content.appendChild(spanTitle)
   }
 
+  /* istanbul ignore else */
   if (message) {
     const spanMessage = document.createElement('span')
     spanMessage.classList.add('u-fs-15')
