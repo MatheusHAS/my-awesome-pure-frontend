@@ -3,15 +3,15 @@ const regex = {
 }
 
 export class Router {
-  routes = []
-  currentPath = '/'
+  readonly routes = []
+  private currentPath = '/'
 
   constructor() {
     const { pathname } = window.location
     this.currentPath = pathname
   }
 
-  _mapRoutesToAdd(routes: string[]) {
+  private _mapRoutesToAdd(routes: string[]) {
     return routes.map((route: string) => {
       let newRoute: string = route.toString()
       const matchResult = newRoute.match(regex.routeParam)
@@ -31,7 +31,7 @@ export class Router {
     })
   }
 
-  matchRoutes() {
+  private matchRoutes() {
     return this.routes.filter((route) => route.uris.filter((uri) => this.currentPath.match(new RegExp(uri))).length > 0)
   }
 

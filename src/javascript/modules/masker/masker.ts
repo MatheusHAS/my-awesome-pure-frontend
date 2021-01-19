@@ -9,14 +9,14 @@ export class Masker {
     this._findFieldsToMask()
   }
 
-  _findFieldsToMask() {
+  private _findFieldsToMask() {
     Object.keys(Rules).forEach((rule) => {
       const elements = document.querySelectorAll(`[${ClassMap.maskPrefix}${rule}]`)
       elements.forEach((element) => this._applyRules(element, Rules[rule]))
     })
   }
 
-  _applyRules(element, rule) {
+  private _applyRules(element, rule) {
     element.placeholder = rule.mask
     element.setAttribute('maxlength', rule.mask.length)
     element.addEventListener('keydown', rule.event)

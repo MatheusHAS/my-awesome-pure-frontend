@@ -98,13 +98,13 @@ describe('Testing [Validator] module', () => {
     userEvent.clear(validator.inputs[0].input)
     expect(validator.inputs[0].input.value).toBe('')
 
-    validator._clearErrors()
+    validator.clearErrors()
   })
 
   test('Should silent validation (not show errors)', () => {
     const validator = new Validator(null, ValidatorOptions)
     userEvent.type(validator.inputs[0].input, 'ab')
-    validator._clearErrors()
+    validator.clearErrors()
     validator.validateSilent()
     expect(validator.inputs[0].error.innerText).toBe('')
   })
