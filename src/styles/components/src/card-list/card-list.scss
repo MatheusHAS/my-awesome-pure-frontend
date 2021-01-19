@@ -33,6 +33,14 @@
       .#{$component}__details {
         display: flex;
         flex-wrap: nowrap;
+        line-height: 1.4;
+
+        span,
+        .fi {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
         span:nth-child(1) {
           margin-right: 4px;
