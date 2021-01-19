@@ -38,12 +38,14 @@ ready(() => {
 
   const router = new Router()
   router.add(['/', '/index.html'], () => {
+    document.title = `${document.title} - Listagem`
     import(/* webpackChunkName: "homepage" */ './pages/homepage').then((module) => {
       const fn = module.default
       fn()
     })
   })
   router.add(['/create.html', '/create', '/update.html', '/update'], () => {
+    document.title = `${document.title} - Atualizando`
     import(/* webpackChunkName: "member" */ './pages/member').then((module) => {
       const fn = module.default
       fn()
