@@ -1,0 +1,12 @@
+@mixin column($prefix, $columns) {
+  @for $columnSize from 1 through $columns {
+    $sufix: #{$columnSize}\@#{$prefix};
+    $columnPercent: percentage($columnSize / $columns);
+
+    .o-column-#{$sufix} {
+      flex: 0 0 $columnPercent;
+      -webkit-flex: 0 0 $columnPercent;
+      max-width: $columnPercent;
+    }
+  }
+}

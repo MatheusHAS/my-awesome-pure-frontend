@@ -1,0 +1,22 @@
+$DISPLAY_VALUES: none block flex;
+$SUFIXES: "" sm md;
+
+@each $value in $DISPLAY_VALUES {
+  $prefix: u-d#{str-slice($value, 1, 1)};
+  @if $prefix == "u-df" {
+    $prefix: u-flex;
+  }
+  @each $sufix in $SUFIXES {
+    @if $sufix != "" {
+      @include mediaquery($sufix) {
+        .#{$prefix}\@#{$sufix} {
+          display: $value;
+        }
+      }
+    } @else {
+      .#{$prefix} {
+        display: $value;
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+@import './src/mixins';
+@import './src/variables';
+
+.#{$component} {
+  position: relative;
+
+  &__input {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid $color-input-focus;
+    outline: 0;
+    font-size: 16px;
+    color: $color-text;
+    margin-top: 1rem;
+    height: 2.5rem;
+    background: transparent;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:placeholder-shown ~ .#{$component}__label {
+      cursor: text;
+      top: 27px;
+    }
+
+    &:focus {
+      border: none;
+      text-shadow: 0 0 0 gray;
+
+      outline: none;
+      border-bottom: 2px solid $color-input-focus;
+
+      ~ .#{$component}__label {
+        color: $color-input-focus;
+        position: absolute;
+        top: 4px;
+        display: block;
+        transition: 0.2s;
+        font-size: 12px;
+      }
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      color: $color-disabled;
+    }
+  }
+
+  &.has-error {
+    .#{$component}__input {
+      border-bottom: 2px solid $color-error;
+
+      // & ~ .#{$component}__label {
+      //   color: $color-error;
+      // }
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 32px;
+    display: block;
+    transition: 0.2s;
+    font-size: 12px;
+    z-index: -1;
+    // color: $color-input-without-focus;
+    color: $color-input-focus;
+  }
+
+  &__helper {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    text-align: left;
+
+    .#{$component}.has-error & {
+      color: $color-error;
+    }
+  }
+}
+
+.is-dirty {
+  .#{$component}__label {
+    position: absolute;
+    color: $color-input-focus;
+    top: 4px;
+    display: block;
+    transition: 0.2s;
+    font-size: 12px;
+  }
+}

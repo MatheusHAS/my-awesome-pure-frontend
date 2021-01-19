@@ -1,0 +1,12 @@
+$FONT_SIZES: 12 14 16 18 20 22 24 26 28 40 52 58 60;
+$SUFIXES: "" sm md;
+
+@each $sufix in $SUFIXES {
+  @if $sufix != "" {
+    @include mediaquery($sufix) {
+      @include fontsize($FONT_SIZES, $sufix);
+    }
+  } @else {
+    @include fontsize($FONT_SIZES);
+  }
+}

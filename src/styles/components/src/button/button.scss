@@ -1,0 +1,58 @@
+@import './src/mixins';
+@import './src/variables';
+
+.#{$component} {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50px;
+  vertical-align: middle;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  line-height: 2.5;
+  min-width: 150px;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+  outline: none;
+  cursor: pointer;
+
+  &__text {
+    color: $color-white;
+  }
+
+  &--primary {
+    @include button-opacity($color-white, $color-blue-esmerald);
+  }
+
+  &--disabled {
+    background-color: $color-disabled-bg;
+    cursor: not-allowed;
+
+    .#{$component}__text {
+      color: $color-disabled-font;
+    }
+
+    &:hover {
+      opacity: 100%;
+    }
+  }
+
+  &[disabled],
+  &.is-disabled {
+    cursor: not-allowed;
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &::-moz-focus-inner {
+    border: none;
+  }
+}

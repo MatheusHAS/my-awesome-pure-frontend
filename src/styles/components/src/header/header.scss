@@ -1,0 +1,43 @@
+@import './src/mixins';
+@import './src/variables';
+
+.#{$component} {
+  display: flex;
+  background: $color-blue-esmerald;
+  height: 64px;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      color: $color-white;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    li {
+      a {
+        padding: 6px 8px;
+        text-decoration: none;
+        color: $color-text;
+        border: 1px solid $color-text;
+        margin: auto 4px auto;
+        border-radius: 4px;
+
+        &:hover {
+          box-shadow: 1px 1px 3px 0px #14443f;
+          border-color: $color-white;
+          background-color: $color-white;
+        }
+      }
+    }
+  }
+}

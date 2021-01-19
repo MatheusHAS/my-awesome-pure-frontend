@@ -1,0 +1,122 @@
+@import './src/mixins';
+@import './src/variables';
+
+.#{$component} {
+  display: flex;
+  flex-flow: nowrap;
+  padding: 18px 40px 18px 18px;
+  border-radius: 8px;
+  animation: bounceInRight 0.5s;
+
+  &.is-success {
+    background-color: $toast-color-success;
+    &:hover {
+      background-color: darken($toast-color-success, 3);
+    }
+  }
+
+  &.is-error {
+    background-color: $toast-color-error;
+    &:hover {
+      background-color: darken($toast-color-error, 3);
+    }
+  }
+
+  &.is-warning {
+    background-color: $toast-color-warning;
+    &:hover {
+      background-color: darken($toast-color-warning, 3);
+    }
+  }
+
+  &.on-removing {
+    animation: fadeout 0.5s;
+  }
+
+  &__list {
+    display: flex;
+    flex-flow: column-reverse;
+    position: absolute;
+    right: 24px;
+    top: 90px;
+    max-width: 90vw;
+    z-index: 9999;
+    > div {
+      margin: 6px;
+    }
+  }
+
+  &__icon {
+    font-size: 18px;
+  }
+
+  &__close {
+    position: absolute;
+    right: -36px;
+    bottom: 0;
+    top: -2px;
+    font-size: 1.4em;
+    font-weight: 500;
+    height: 100%;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  &__progress {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: calc(100% - 12px);
+    border-radius: 8px;
+    height: 4px;
+    background-color: $color-white;
+    opacity: 0.7;
+    margin: 6px;
+    animation: normal 8s progressAnimation both;
+    animation-iteration-count: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes progressAnimation {
+  from {
+    width: calc(100% - 12px);
+    display: block;
+  }
+  to {
+    width: 0;
+  }
+}
+
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(2000px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-30px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

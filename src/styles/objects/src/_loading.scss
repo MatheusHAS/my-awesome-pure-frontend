@@ -1,0 +1,31 @@
+$loading-size: 30px;
+$loading-line-size: 3px;
+$loading-line-color: $color-white;
+$button-component-text: 'c-button__text';
+
+.o-loading {
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  border: solid $loading-line-size $loading-line-color;
+  border-radius: 50%;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  transition: all 0.4s ease-in;
+  width: $loading-size;
+  height: $loading-size;
+
+  ~ .#{$button-component-text} {
+    display: none;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

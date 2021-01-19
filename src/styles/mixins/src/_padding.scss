@@ -1,0 +1,24 @@
+@mixin padding($prop, $fonts, $sufix: "") {
+  @each $font in $fonts {
+    $prefix: str-slice($prop, 1, 1);
+    $size: #{($font/16)}rem;
+
+    @if $sufix != "" {
+      .u-p#{$prefix}-#{$font}\@#{$sufix} {
+        @if $prefix != "d" {
+          padding-#{$prop}: $size;
+        } @else {
+          padding: $size;
+        }
+      }
+    } @else {
+      .u-p#{$prefix}-#{$font} {
+        @if $prefix != "d" {
+          padding-#{$prop}: $size;
+        } @else {
+          padding: $size;
+        }
+      }
+    }
+  }
+}
