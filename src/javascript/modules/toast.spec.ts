@@ -51,5 +51,7 @@ describe('Testing [Toast] module', () => {
     const toastListBox = document.querySelector(ClassMap.toastList)
     expect(toastListBox).not.toBeNull()
     expect(toastListBox.childNodes.length).toBe(2)
+
+    jest.runAllTimers()
   })
 })

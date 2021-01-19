@@ -6,12 +6,18 @@ const ClassMap = {
   icon: 'c-toast__icon',
   closeButton: 'c-toast__close',
   onRemoving: 'on-removing',
+  progressClass: 'c-toast__progress',
+}
+
+const Options = {
+  fadeOutTime: 500,
+  autoremoveNotifyTime: 8000,
 }
 
 interface IToastMaker {
   title?: string
   message?: string
-  type?: ToastType
+  type: ToastType
   iconHTML?: string
 }
 
@@ -21,7 +27,7 @@ const eventOnCloseClick = (event) => {
   targetElement.closest(`.${ClassMap.component}`).classList.add(ClassMap.onRemoving)
   setTimeout(() => {
     targetElement.closest(`.${ClassMap.component}`).remove()
-  }, 500)
+  }, Options.fadeOutTime)
 }
 
 const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
@@ -67,10 +73,14 @@ const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
   closeButton.addEventListener('click', eventOnCloseClick)
   closeButton.setAttribute('data-testid', 'toast-close')
 
+  const progressBar = document.createElement('div')
+  progressBar.classList.add(ClassMap.progressClass)
+
   container.appendChild(content)
   container.appendChild(closeButton)
 
   component.appendChild(container)
+  component.appendChild(progressBar)
 
   return component
 }
@@ -81,17 +91,30 @@ const MakeToastListBox = () => {
   return toastListBox
 }
 
+const AutoRemoveNotify = (element: any) => {
+  /* istanbul ignore else */
+  if (element) {
+    element.remove()
+  }
+}
+
 const Toast = {
   notify(options: IToastMaker) {
     const elementToast = MakeToastElement(options)
 
     let elementToastList = document.querySelector(`.${ClassMap.toastList}`)
     if (elementToastList) {
-      elementToastList.appendChild(elementToast)
+      const elementToRemove = elementToastList.appendChild(elementToast)
+      setTimeout(() => {
+        AutoRemoveNotify(elementToRemove)
+      }, Options.autoremoveNotifyTime)
     } else {
       elementToastList = MakeToastListBox()
       elementToastList.appendChild(elementToast)
-      document.body.appendChild(elementToastList)
+      const elementToRemove = document.body.appendChild(elementToastList)
+      setTimeout(() => {
+        AutoRemoveNotify(elementToRemove)
+      }, Options.autoremoveNotifyTime)
     }
   },
 }
