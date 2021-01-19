@@ -12,7 +12,7 @@
     "test:cypress:run": "cypress run",
     "test:cypress:open": "cypress open",
     "test:cypress:ci": "start-server-and-test dev:base http-get://localhost:8080 test:cypress:run",
-    "test:coveralls": "npm run test --coverage",
+    "test:coveralls": "npm run test:ci && coveralls < coverage/lcov.info",
     "test:staged": "npm test -- --findRelatedTests"
   },
   "author": "Matheus Azambuja <matheushenrique.ads@gmail.com>",
