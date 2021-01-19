@@ -59,7 +59,7 @@ In this project, i preferred don't use any template engines, to maintain more cl
 
 ### Javascript\Modules
 
-All modules used in javascript folder, was developed of me.
+All `modules` and `components` used in javascript folder, was developed of me.
 
 - `masker/masker.ts`
 
