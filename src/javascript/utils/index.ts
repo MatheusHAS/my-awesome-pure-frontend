@@ -20,7 +20,6 @@ const options = {
 const loadMembersList = (elementList: any) => {
   const memberList = LocalStorage.getItem(stateKeyName)
   if (elementList) {
-    elementList.innerHTML = ''
     const contentFragment = document.createDocumentFragment()
 
     memberList.forEach((member: IMember) => {
@@ -37,6 +36,7 @@ const loadMembersList = (elementList: any) => {
       contentFragment.append(newCard)
     })
 
+    elementList.innerHTML = ''
     if (contentFragment && contentFragment.childElementCount > 0) {
       elementList.appendChild(contentFragment)
     }

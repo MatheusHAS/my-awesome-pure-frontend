@@ -5,7 +5,10 @@ const elements = {
 }
 
 const homepage = () => {
-  loadMembersList(elements.list)
+  // To show Skeleton :)
+  setTimeout(() => {
+    loadMembersList(elements.list)
+  }, 500)
 }
 
 export default homepage

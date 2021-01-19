@@ -14,6 +14,7 @@ const actions: any = {
     const arrayFields: any[] = [name, email, cpf, phone]
     formInstance.disableFields(true, arrayFields)
     const formData: any = formInstance.getFormDataByElements(arrayFields)
+    // To show Loading on button :)
     setTimeout(() => {
       formData.cpf = formData.cpf.replace(/[^\d]+/g, '')
       formData.phone = formData.phone.replace(/[^\d]+/g, '')
@@ -34,6 +35,8 @@ const actions: any = {
     const arrayFields = [name, cpf, phone]
     formInstance.disableFields(true, arrayFields)
     const formData: any = formInstance.getFormDataByElements(arrayFields)
+
+    // To show Loading on button :)
     setTimeout(() => {
       formData.cpf = formData.cpf.replace(/[^\d]+/g, '')
       formData.phone = formData.phone.replace(/[^\d]+/g, '')
