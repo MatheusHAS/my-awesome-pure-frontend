@@ -31,9 +31,12 @@
   }
 
   &--disabled {
-    color: $color-disabled-font;
     background-color: $color-disabled-bg;
     cursor: not-allowed;
+
+    .#{$component}__text {
+      color: $color-disabled-font;
+    }
 
     &:hover {
       opacity: 100%;

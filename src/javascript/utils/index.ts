@@ -59,12 +59,14 @@ const createCardItem = (member: IMember, removeCallback: VoidFunction) => {
   header.classList.add(options.cardList.header)
 
   const headerEditLink = document.createElement('a')
-  headerEditLink.innerText = 'Editar'
+  headerEditLink.innerHTML = '<span class="fi flaticon-pencil"></span>'
+  headerEditLink.classList.add('c-card-list__edit')
   headerEditLink.href = `/update.html?email=${email}`
   headerEditLink.setAttribute('data-testid', 'link-edit')
 
   const headerRemoveLink = document.createElement('a')
-  headerRemoveLink.innerText = 'Remover'
+  headerRemoveLink.classList.add('c-card-list__remove')
+  headerRemoveLink.innerHTML = '<span class="fi flaticon-x-mark"></span>'
   headerRemoveLink.addEventListener('click', (event) => {
     event.preventDefault()
     removeCallback()
@@ -92,7 +94,7 @@ const createCardItem = (member: IMember, removeCallback: VoidFunction) => {
   liEmail.classList.add(options.cardList.details)
 
   const liEmailIcon = document.createElement('span')
-  liEmailIcon.innerText = 'ICON'
+  liEmailIcon.innerHTML = '<span class="fi flaticon-email"></span>'
 
   const liEmailText = document.createElement('span')
   liEmailText.innerText = email
@@ -105,7 +107,7 @@ const createCardItem = (member: IMember, removeCallback: VoidFunction) => {
   liCpf.classList.add(options.cardList.details)
 
   const liCpfIcon = document.createElement('span')
-  liCpfIcon.innerText = 'ICON'
+  liCpfIcon.innerHTML = '<span class="fi flaticon-identity-card"></span>'
 
   const liCpfText = document.createElement('span')
   liCpfText.innerText = Formatter.cpf(cpf)
@@ -118,7 +120,7 @@ const createCardItem = (member: IMember, removeCallback: VoidFunction) => {
   liPhone.classList.add(options.cardList.details)
 
   const liPhoneIcon = document.createElement('span')
-  liPhoneIcon.innerText = 'ICON'
+  liPhoneIcon.innerHTML = '<span class="fi flaticon-smartphone"></span>'
 
   const liPhoneText = document.createElement('span')
   liPhoneText.innerText = Formatter.phone(phone)

@@ -13,8 +13,7 @@
 
     &:hover {
       .#{$component}__content {
-        border-color: $color-blue-esmerald;
-        background-color: $card-bg-color;
+        box-shadow: 5px 8px 15px 0px rgba(0, 0, 0, 0.1);
       }
     }
   }
@@ -22,8 +21,10 @@
   &__content {
     padding: 24px;
     border: 1px solid $card-border-color;
+    background-color: $card-bg-content;
     overflow: hidden;
     border-radius: 8px;
+    transition: box-shadow 0.3s ease-in-out;
 
     ul {
       display: flex;
@@ -34,7 +35,7 @@
         flex-wrap: nowrap;
 
         span:nth-child(1) {
-          margin-right: 8px;
+          margin-right: 4px;
         }
       }
     }
@@ -42,14 +43,41 @@
 
   &__header {
     position: absolute;
+    top: 0;
     right: 0;
     left: 0;
     width: 100%;
     text-align: right;
-    padding-right: 24px;
+    padding-top: 20px;
+    padding-right: 20px;
   }
 
   &__name {
-    padding-bottom: 16px;
+    padding-bottom: 10px;
+  }
+
+  &__edit,
+  &__remove {
+    padding: 3px;
+    cursor: pointer;
+    .fi::before {
+      font-size: 1.1em;
+    }
+  }
+
+  &__remove {
+    &:hover {
+      .fi::before {
+        color: $color-red;
+      }
+    }
+  }
+
+  &__edit {
+    &:hover {
+      .fi::before {
+        color: $color-warning;
+      }
+    }
   }
 }
