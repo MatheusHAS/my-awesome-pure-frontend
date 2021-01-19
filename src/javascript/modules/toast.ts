@@ -30,7 +30,7 @@ const MakeToastElement = ({ title, message, type, iconHTML }: IToastMaker) => {
   component.setAttribute('data-testid', 'toast')
 
   const container = document.createElement('div')
-  container.classList.add(...['u-flex', 'u-flex-row', 'u-w-100', 'u-relative'])
+  container.classList.add(...['u-flex', 'u-flex-row', 'u-w-100', 'u-relative', 'u-items-center'])
 
   /* istanbul ignore else */
   if (iconHTML) {
