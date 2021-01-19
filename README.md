@@ -5,6 +5,13 @@
 
 > The solution was a test developed, aiming to be as pure as possible, without using a lot of dependencies to demonstrate frontend knowledge.
 
+<br/>
+
+## [View online demonstration, click here 🚀](https://my-awesome-pure-frontend.vercel.app)
+
+<br/>
+<br/>
+
 ## Installing / Getting started
 
 To install run:
@@ -13,16 +20,22 @@ To install run:
 $ npm i
 ```
 
-and execute development use:
+Execute on `development` mode use:
 
 ```shell
 $ npm run dev
 ```
 
-and to build for production, use:
+To build for `production`, use:
 
 ```shell
 $ npm run build
+```
+
+To run all tests use:
+
+```shell
+$ npm run test:cypress:ci
 ```
 
 ## Developing
@@ -36,7 +49,9 @@ $ npm run build
 - `jest` and `cypress` to tests
 - `husky` to guarantee run all tests before commits
 - `Webpack` is used to run task builds, to generate the build of project and run local dev server
-- and `Github actions` to run all tests when created a Pull request
+- `Github actions` to run all tests when created a Pull request
+- [travis-ci](https://travis-ci.org/github/MatheusHAS/my-awesome-pure-frontend) to make a build pipeline and to update `coveralls` (tests coverage)
+- [vercel.com](https://vercel.com/) is used to provide a production build hosted for this project. [You can see running project in this link!](https://my-awesome-pure-frontend.vercel.app)
 
 ### Template engine
 
@@ -44,7 +59,7 @@ In this project, i preferred don't use any template engines, to maintain more cl
 
 ### Javascript\Modules
 
-All modules used in javascript folder, was developed of me.
+All `modules` and `components` used in javascript folder, was developed of me.
 
 - `masker/masker.ts`
 
@@ -81,19 +96,9 @@ All modules used in javascript folder, was developed of me.
 - `memberCrud.ts`
   > This script use the `localStorage.ts` to manipulate my existing crud (create, update, read and delete) of members
 
-## Tests
-
-To run all tests use:
-
-```shell
-$ npm run test:cypress:ci
-```
-
 ---
 
-### Developed by
-
-# Matheus Azambuja
+### Developed with 💜 by Matheus Azambuja
 
 [github.com/MatheusHAS](https://github.com/MatheusHAS)
 

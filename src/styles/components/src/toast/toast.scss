@@ -7,6 +7,7 @@
   padding: 18px 40px 18px 18px;
   border-radius: 8px;
   animation: bounceInRight 0.5s;
+  will-change: transform, opacity;
 
   &.is-success {
     background-color: $toast-color-success;
@@ -41,6 +42,8 @@
     top: 90px;
     max-width: 90vw;
     z-index: 9999;
+    overflow: hidden;
+
     > div {
       margin: 6px;
     }
@@ -74,12 +77,11 @@
     bottom: 0;
     left: 0;
     right: 0;
-    width: calc(100% - 12px);
     border-radius: 8px;
     height: 4px;
     background-color: $color-white;
     opacity: 0.7;
-    margin: 6px;
+    will-change: width;
     animation: normal 8s progressAnimation both;
     animation-iteration-count: 1;
   }
@@ -96,7 +98,7 @@
 
 @keyframes progressAnimation {
   from {
-    width: calc(100% - 12px);
+    width: calc(100%);
     display: block;
   }
   to {
