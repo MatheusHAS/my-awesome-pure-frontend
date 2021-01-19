@@ -28,7 +28,8 @@ const loadMembersList = (elementList: any) => {
         onRemoveMember(member.email, () => {
           Toast.notify({
             message: 'Membro excluido!',
-            type: 'error',
+            type: 'success',
+            iconHTML: '<span class="fi flaticon-check"></span>',
           })
           loadMembersList(elementList)
         })

@@ -24,6 +24,7 @@ const actions: any = {
       Toast.notify({
         message: 'Membro criado com sucesso!',
         type: 'success',
+        iconHTML: '<span class="fi flaticon-check"></span>',
       })
     }, 2000)
   },
@@ -43,6 +44,7 @@ const actions: any = {
       Toast.notify({
         message: 'Dados atualizados com sucesso!',
         type: 'success',
+        iconHTML: '<span class="fi flaticon-check"></span>',
       })
     }, 2000)
   },
