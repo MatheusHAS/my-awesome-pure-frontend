@@ -4,6 +4,16 @@ const ALLOWED_ATTRIBUTES = ['minlength', 'maxlength']
 const ValidationDataPrefix = 'data-validate-'
 const ValidationMessageSufix = '-message'
 
+let ClassMap = {
+  errorMessageSelector: '[data-error-message]',
+  rowSelector: '[data-field-row]',
+  inputSelector: '[data-field-input]',
+  errorClass: 'has-error',
+  successClass: 'has-success',
+  validateEvent: 'keyup',
+  disabledClass: 'c-button--disabled',
+}
+
 interface IValidatorOptions {
   errorMessageSelector?: string
   disabledClass?: string
@@ -24,52 +34,21 @@ interface IValidatorInput {
 
 export class Validator {
   form: Element | HTMLFormElement | null = null
-  submitButton: Element | HTMLElement | null = null
+  readonly submitButton: Element | HTMLElement | null = null
   formIsValid: boolean = false
-  errorMessageSelector: string = '[data-error-message]'
-  rowSelector: string = '[data-field-row]'
-  inputSelector: string = '[data-field-input]'
-  errorClass: string = 'has-error'
-  successClass: string = 'has-success'
-  validateEvent: string = 'keyup'
-  disabledClass: string = 'c-button--disabled'
-  clearOnEmpty: boolean = true
+  private readonly clearOnEmpty: boolean = true
   inputs: IValidatorInput[] = []
 
   constructor(formSelector: string, options: IValidatorOptions) {
     this.form = document.querySelector(formSelector || '[data-form]')
     this.form.setAttribute('novalidate', 'true')
     this.submitButton = this.form.querySelector('[type="submit"]')
-    const {
-      errorMessageSelector,
-      disabledClass,
-      rowSelector,
-      errorClass,
-      successClass,
-      clearOnEmpty,
-      validateEvent,
-    } = options
-    if (errorMessageSelector) {
-      this.errorMessageSelector = errorMessageSelector
+    if (options.clearOnEmpty) {
+      this.clearOnEmpty = options.clearOnEmpty
     }
-    if (rowSelector) {
-      this.rowSelector = rowSelector
-    }
-    if (errorClass) {
-      this.errorClass = errorClass
-    }
-    if (successClass) {
-      this.successClass = successClass
-    }
-    if (clearOnEmpty) {
-      this.clearOnEmpty = clearOnEmpty
-    }
-    if (validateEvent) {
-      this.validateEvent = validateEvent
-    }
-    if (disabledClass) {
-      this.disabledClass = disabledClass
-    }
+    /* istanbul ignore else */
+    if (options) delete options.clearOnEmpty
+    ClassMap = Object.assign(ClassMap, options)
     this._mapInputs()
     this._addValidationEvents()
     this.formIsValid = this.validateSilent()
@@ -77,15 +56,15 @@ export class Validator {
   }
 
   checkButton() {
-    this.submitButton.classList.toggle(this.disabledClass, !this.formIsValid)
+    this.submitButton.classList.toggle(ClassMap.disabledClass, !this.formIsValid)
     // this.submitButton.toggleAttribute('disabled', !this.formIsValid)
   }
 
-  _addValidateEventOnInput(inputField: HTMLElement, event: any) {
-    inputField.addEventListener(this.validateEvent, event)
+  private _addValidateEventOnInput(inputField: HTMLElement, event: any) {
+    inputField.addEventListener(ClassMap.validateEvent, event)
   }
 
-  _addValidationEvents() {
+  private _addValidationEvents() {
     this.inputs.forEach((inputRow) => {
       let alreadAddedEvent = false
       Object.keys(validationRules).forEach((rule) => {
@@ -117,13 +96,13 @@ export class Validator {
     })
   }
 
-  validateField(inputRow: IValidatorInput, silent = false) {
+  private validateField(inputRow: IValidatorInput, silent = false) {
     const { value, name } = inputRow.input
     const { rules } = inputRow
     return rules.every((rule) => {
       const { validateFunction, parameter, errorMessage } = rule
       const isValid = parameter ? validateFunction(value, parameter) : validateFunction(value)
-      if (!silent && inputRow.row.classList.contains(this.errorClass)) {
+      if (!silent && inputRow.row.classList.contains(ClassMap.errorClass)) {
         this._clearMessageError(name)
       }
       if (!silent && !isValid) {
@@ -158,15 +137,15 @@ export class Validator {
     return this.formIsValid
   }
 
-  _mapInputs() {
-    const inputs: NodeListOf<Element> = document.querySelectorAll(this.rowSelector)
+  private _mapInputs() {
+    const inputs: NodeListOf<Element> = document.querySelectorAll(ClassMap.rowSelector)
     inputs.forEach((inputRow) => {
-      const inputField: HTMLInputElement = inputRow.querySelector(this.inputSelector)
+      const inputField: HTMLInputElement = inputRow.querySelector(ClassMap.inputSelector)
       if (inputField.hasAttribute('disabled') || inputField.type === 'hidden') {
         return
       }
       const inputFieldName = inputField.getAttribute('name')
-      const errorField: HTMLElement = inputRow.querySelector(this.errorMessageSelector)
+      const errorField: HTMLElement = inputRow.querySelector(ClassMap.errorMessageSelector)
       this.inputs.push({
         name: inputFieldName,
         input: inputField,
@@ -177,19 +156,19 @@ export class Validator {
     })
   }
 
-  _setErrorMessage(fieldName: string, message: string) {
+  private _setErrorMessage(fieldName: string, message: string) {
     const inputField = this.inputs.filter((input) => input.name === fieldName).shift()
-    inputField.row.classList.add(this.errorClass)
+    inputField.row.classList.add(ClassMap.errorClass)
     inputField.error.innerText = message
   }
 
-  _clearMessageError(fieldName: string) {
+  private _clearMessageError(fieldName: string) {
     const inputField = this.inputs.filter((input) => input.name === fieldName).shift()
-    inputField.row.classList.remove(this.errorClass)
+    inputField.row.classList.remove(ClassMap.errorClass)
     inputField.error.innerText = ''
   }
 
-  _clearErrors() {
+  clearErrors() {
     this.inputs.forEach((input) => {
       input.error.innerText = ''
     })
