@@ -1,5 +1,8 @@
 # my-awesome-pure-frontend
 
+[![Build Status](https://travis-ci.org/MatheusHAS/my-awesome-pure-frontend.svg?branch=main)](https://travis-ci.org/MatheusHAS/my-awesome-pure-frontend)
+[![Coverage Status](https://coveralls.io/repos/github/MatheusHAS/my-awesome-pure-frontend/badge.svg?branch=main)](https://coveralls.io/github/MatheusHAS/my-awesome-pure-frontend?branch=main)
+
 > The solution was a test developed, aiming to be as pure as possible, without using a lot of dependencies to demonstrate frontend knowledge.
 
 ## Installing / Getting started
